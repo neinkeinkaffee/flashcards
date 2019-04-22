@@ -1,0 +1,28 @@
+body {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+#content {
+    width: 20em;
+}
+
+button, input, #card {
+    border: 1px black solid;
+    margin-top: 0.35em;
+    margin-bottom: 0.35em;
+    outline: none;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+#card {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    height: 10em;
+    width: 17.85em;
+    margin-top: 2em;
+}
