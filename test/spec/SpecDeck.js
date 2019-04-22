@@ -1,4 +1,4 @@
-describe('Testing manipulation of the flashcard deck', ()=>{
+describe('Testing manipulation of the flashcard deck', ()=> {
     it('should add a new flashcard', ()=>{
         let deck = new Deck();
         let card = {
