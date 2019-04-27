@@ -4393,7 +4393,7 @@ getJasmineRequireObj().toEqual = function(j$) {
    * @name matchers#toEqual
    * @param {Object} expected - Expected value
    * @example
-   * expect(bigObject).toEqual({"foo": ['bar', 'baz']});
+   * expect(bigObject).toEqual({"uuid": ['bar', 'baz']});
    */
   function toEqual(util, customEqualityTesters) {
     customEqualityTesters = customEqualityTesters || [];
@@ -4569,7 +4569,7 @@ getJasmineRequireObj().toHaveBeenCalledWith = function(j$) {
    * @name matchers#toHaveBeenCalledWith
    * @param {...Object} - The arguments to look for
    * @example
-   * expect(mySpy).toHaveBeenCalledWith('foo', 'bar', 2);
+   * expect(mySpy).toHaveBeenCalledWith('uuid', 'bar', 2);
    */
   function toHaveBeenCalledWith(util, customEqualityTesters) {
     return {
@@ -4611,7 +4611,7 @@ getJasmineRequireObj().toHaveClass = function(j$) {
    * @param {Object} expected - The class name to test for
    * @example
    * var el = document.createElement('div');
-   * el.className = 'foo bar baz';
+   * el.className = 'uuid bar baz';
    * expect(el).toHaveClass('bar');
    */
   function toHaveClass(util, customEqualityTesters) {
@@ -4679,7 +4679,7 @@ getJasmineRequireObj().toThrow = function(j$) {
    * @name matchers#toThrow
    * @param {Object} [expected] - Value that should be thrown. If not provided, simply the fact that something was thrown will be checked.
    * @example
-   * expect(function() { return 'things'; }).toThrow('foo');
+   * expect(function() { return 'things'; }).toThrow('uuid');
    * expect(function() { return 'stuff'; }).toThrow();
    */
   function toThrow(util) {
@@ -4741,7 +4741,7 @@ getJasmineRequireObj().toThrowError = function(j$) {
    * expect(function() { return 'things'; }).toThrowError(MyCustomError, 'message');
    * expect(function() { return 'things'; }).toThrowError(MyCustomError, /bar/);
    * expect(function() { return 'stuff'; }).toThrowError(MyCustomError);
-   * expect(function() { return 'other'; }).toThrowError(/foo/);
+   * expect(function() { return 'other'; }).toThrowError(/uuid/);
    * expect(function() { return 'other'; }).toThrowError();
    */
   function toThrowError () {
@@ -6574,7 +6574,7 @@ getJasmineRequireObj().StackTrace = function(j$) {
 
     return messageLines.length;
   }
-  
+
   return StackTrace;
 };
 
