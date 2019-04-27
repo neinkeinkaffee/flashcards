@@ -8,9 +8,7 @@ Deck.prototype.add = function(card) {
 }
 Deck.prototype.delete = function(uuid) {
     this.cards = this.cards.filter(card => {
-        console.log(this.cards)
-        console.log(card.uuid !== uuid)
-        card.uuid !== uuid
+        return card.uuid !== uuid
     })
 }
 Deck.prototype.getCards = function() {
