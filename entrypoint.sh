@@ -8,6 +8,10 @@ KEY_FILE=${KEY_FILE:-/etc/ssl/private/snakeoil-key.pem}
 CERT_FILE=${CERT_FILE:-/etc/ssl/snakeoil-cert.pem}
 
 cat > /etc/nginx/nginx.conf <<EOF
+worker_processes 1;
+
+events { worker_connections 1024; }
+
 http {
 
     server {
