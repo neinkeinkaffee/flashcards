@@ -1,7 +1,6 @@
 # Flashcards
 
-Build and run with docker
+To run this application with docker-compose
 ```
-docker build -t flashcards .
-docker run -d -p 80:80 flashcards
-```
+docker-compose build && docker-compose up
+``` 
