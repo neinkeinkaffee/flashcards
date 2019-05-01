@@ -1,8 +1,12 @@
 function Deck() {
     this.cards = []
 }
-Deck.prototype.add = function(card) {
-    card.uuid = this.generateUUID()
+Deck.prototype.add = function(chinese, english) {
+    card = {
+        'chinese' : chinese,
+        'english': english,
+        'uuid': this.generateUUID()
+    }
     this.cards.push(card)
     return card.uuid
 }

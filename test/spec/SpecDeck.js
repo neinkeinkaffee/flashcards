@@ -1,25 +1,13 @@
 describe('Testing CRUD operations on the flashcard deck', ()=> {
     it('should add a new flashcard', () => {
         let deck = new Deck()
-        let card = {
-            chinese: '咖啡',
-            english: 'coffee'
-        }
-        deck.add(card)
+        deck.add('咖啡', 'coffee')
         expect(deck.getCards().length).toBe(1)
     })
     it('should delete a flashcard', () => {
         let deck = new Deck()
-        let card1 = {
-            chinese: '咖啡',
-            english: 'coffee'
-        }
-        let card2 = {
-            chinese: '茶',
-            english: 'tea'
-        }
-        id1 = deck.add(card1)
-        id2 = deck.add(card2)
+        id1 = deck.add('咖啡', 'coffee')
+        id2 = deck.add('茶', 'tea')
         expect(deck.getCards().length).toBe(2)
         deck.delete(id2)
         expect(deck.getCards().length).toBe(1)
@@ -27,16 +15,8 @@ describe('Testing CRUD operations on the flashcard deck', ()=> {
     })
     it('should select a random flashcard', () => {
         let deck = new Deck()
-        let card1 = {
-            chinese: '咖啡',
-            english: 'coffee'
-        }
-        let card2 = {
-            chinese: '茶',
-            english: 'tea'
-        }
-        id1 = deck.add(card1)
-        id2 = deck.add(card2)
+        id1 = deck.add('咖啡', 'coffee')
+        id2 = deck.add('茶', 'tea')
         let randomCard = deck.random()
         expect([id1, id2]).toContain(randomCard.uuid)
     })

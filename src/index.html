@@ -9,7 +9,7 @@
                 <h3>Flashcards</h3>
             </div>
             <div id="entry">
-                <input type="text" id="chinese" placeholder="Chinese">
+                <input type="text" id="chinese" placeholder="Chinese" autofocus>
                 <input type="text" id="english" placeholder="English">
                 <button id="add">Add</button>
             </div>
@@ -23,5 +23,29 @@
             </div>
         </div>
     <script type="text/javascript" src="Deck.js"></script>
+    <script type="text/javascript">
+        window.onload = () => {
+            let deck = new Deck()
+            let active
+            document.querySelector("#add").onclick = () => {
+                let chinese = document.querySelector("#chinese");
+                let english = document.querySelector("#english");
+                deck.add(
+                    chinese.value,
+                    english.value
+                )
+                chinese.value = ''
+                english.value = ''
+                chinese.focus()
+            }
+            document.querySelector("#next").onclick = () => {
+                active = deck.random()
+                document.querySelector("#card").textContent = active.english
+            }
+            document.querySelector("#solution").onclick = () => {
+                document.querySelector("#card").textContent = active.chinese
+            }
+        }
+    </script>
     </body>
 </html>
