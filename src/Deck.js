@@ -15,11 +15,15 @@ Deck.prototype.getCards = function() {
     return this.cards
 }
 Deck.prototype.generateUUID = function() {
-    var now = new Date().getTime();
-    var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
-        var rand = (now + Math.random() * 16) % 16 | 0;
+    let now = new Date().getTime();
+    let uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+        let rand = (now + Math.random() * 16) % 16 | 0;
         now = Math.floor(now / 16);
         return (c == "x" ? rand : (rand & 0x3 | 0x8)).toString(16);
     });
     return uuid;
+}
+Deck.prototype.random = function() {
+    let rand = Math.floor((Math.random() * this.cards.length))
+    return this.cards[rand]
 }
