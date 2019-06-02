@@ -2,20 +2,12 @@ version: '3'
 
 services:
 
-  flashcards:
-    build:
-      context: ./services/client
-      dockerfile: Dockerfile
-    ports:
-      - 80:80
-      - 443:443
-
-  server:
+  flask:
     build:
       context: ./services/server
       dockerfile: Dockerfile
     ports:
-      - 5001:5000
+      - 5000:5000
     environment:
       - FLASK_ENV=development
       - APP_SETTINGS=project.config.DevelopmentConfig
@@ -33,3 +25,16 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+
+  flashcards:
+    build:
+      context: ./services/client
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - flask
+# Uncomment for hot reload during development
+#    volumes:
+#      - ./services/client/src:/usr/share/nginx/html

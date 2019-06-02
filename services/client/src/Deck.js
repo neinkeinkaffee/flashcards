@@ -1,5 +1,12 @@
 function Deck() {
     this.cards = []
+    fetch(API_BASE_URL + '/flashcards')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            this.cards = data['flashcards'];
+        });
+    console.log(this.cards);
 }
 Deck.prototype.add = function(chinese, english) {
     card = {

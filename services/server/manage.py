@@ -23,7 +23,7 @@ def seed_db():
         english='Have you eaten?'
     ))
     db.session.add(Flashcard(
-        chinese='去哪裡啊',
+        chinese='去哪裡啊?',
         english='Where are you headed?'
     ))
     db.session.commit()
