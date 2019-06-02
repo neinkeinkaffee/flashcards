@@ -9,8 +9,8 @@ from where the backend with flask and postgres, the docker integration as well a
 Proper secret injection remains to be implemented.
 For now, export the url of the flask backend into a bash variable and use sed to replace its occurrences before starting up the app.
 ```
-sed -i "s#API_BASE_URL#$API_BASE_URL#g" services/client/src/Deck.js # Linux
-sed -i "" s#API_BASE_URL#$API_BASE_URL#g" services/client/src/Deck.js # Mac OS
+sed -i "s#API_BASE_URL#'$API_BASE_URL'#g" services/client/src/Deck.js # Linux
+sed -i "" s#API_BASE_URL#'$API_BASE_URL'#g" services/client/src/Deck.js # Mac OS
 ```
 
 To run this application with docker-compose
