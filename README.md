@@ -7,10 +7,10 @@ https://github.com/testdrivenio/flask-vue-kubernetes
 from where the backend with flask and postgres, the docker integration as well as the structure of this project have been adapted. 
 
 Proper secret injection remains to be implemented.
-For now, replace the placeholder for the URL of the flask backend with sed before starting up the app.
+For now, export the url of the flask backend into a bash variable and use sed to replace its occurrences before starting up the app.
 ```
-sed -i "s#API_BASE_URL#$API_URL#g" services/client/src/Deck.js # Linux
-sed -i "" s#API_BASE_URL#$API_URL#g" services/client/src/Deck.js # Mac OS
+sed -i "s#API_BASE_URL#$API_BASE_URL#g" services/client/src/Deck.js # Linux
+sed -i "" s#API_BASE_URL#$API_BASE_URL#g" services/client/src/Deck.js # Mac OS
 ```
 
 To run this application with docker-compose
