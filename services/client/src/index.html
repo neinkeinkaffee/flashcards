@@ -39,8 +39,10 @@
                 chinese.focus()
             }
             document.querySelector("#next").onclick = () => {
-                active = deck.random()
-                document.querySelector("#card").textContent = active.english
+                deck.random().then(random => {
+                    active = random
+                    document.querySelector("#card").textContent = active.english
+                })
             }
             document.querySelector("#solution").onclick = () => {
                 document.querySelector("#card").textContent = active.chinese

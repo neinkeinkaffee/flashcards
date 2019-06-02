@@ -36,5 +36,5 @@ services:
     links:
       - flask
 # Uncomment for hot reload during development
-#    volumes:
-#      - ./services/client/src:/usr/share/nginx/html
+    volumes:
+      - ./services/client/src:/usr/share/nginx/html
