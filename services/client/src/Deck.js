@@ -41,11 +41,11 @@ Deck.prototype.generateUUID = function() {
     return uuid;
 }
 Deck.prototype.random = function() {
-    let rand = Math.floor((Math.random() * this.cards.length))
     return fetch(API_BASE_URL + '/flashcards')
         .then(response => response.json())
         .then(data => data['flashcards'])
         .then(flashcards => {
+            let rand = Math.floor((Math.random() * flashcards.length))
             console.log(flashcards[rand]);
             return flashcards[rand];
         });
