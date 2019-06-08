@@ -15,8 +15,8 @@
             </div>
             <div id="study">
                 <div id="card"></div>
-                <button id="solution">Show</button>
-                <button id="next">Next</button>
+                <button id="solution">Show me the answer</button>
+                <button id="next">Ask me something else</button>
             </div>
             <div id="backlog">
                 <ul id="cards"></ul>
@@ -26,7 +26,10 @@
     <script type="text/javascript">
         window.onload = () => {
             let deck = new Deck()
-            let active
+            deck.random().then(random => {
+                active = random
+                document.querySelector("#card").textContent = active.english
+            })
             document.querySelector("#add").onclick = () => {
                 let chinese = document.querySelector("#chinese");
                 let english = document.querySelector("#english");
