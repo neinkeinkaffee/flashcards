@@ -74,11 +74,11 @@ kubectl exec postgres-<POD_IDENTIFIER> --stdin --tty -- createdb -U postgres fla
 
 Build and push the image to Docker Hub:
 ```
-docker build -t some-docker-hub-namespace/flashcards-flask ./services/server
-docker push some-docker-hub-namespace/flashcards-flask
+docker build -t $SOME_DOCKER_HUB_NAMESPACE/flashcards-flask ./services/server
+docker push $SOME_DOCKER_HUB_NAMESPACE/flashcards-flask
 ```
 
-> Make sure to replace `some-docker-hub-namespace` with your Docker Hub namespace in the above commands as well as in *kubernetes/flask-deployment.yml*
+> Make sure to replace `$SOME_DOCKER_HUB_NAMESPACE` with your Docker Hub namespace in the above commands as well as in *kubernetes/flask-deployment.yml*.
 
 Create the deployment:
 ```
@@ -94,11 +94,11 @@ kubectl create -f ./kubernetes/flask-service.yml
 
 Build and push the image to Docker Hub:
 ```
-docker build -t some-docker-hub-namespace/flashcards-nginx ./services/server
-docker push some-docker-hub-namespace/flashcards-nginx
+docker build -t $SOME_DOCKER_HUB_NAMESPACE/flashcards-nginx ./services/server
+docker push $SOME_DOCKER_HUB_NAMESPACE/flashcards-nginx
 ```
 
-> Make sure to replace `some-docker-hub-namespace` with your Docker Hub namespace in the above commands as well as in *kubernetes/flask-deployment.yml*
+> Make sure to replace `$SOME_DOCKER_HUB_NAMESPACE` with your Docker Hub namespace in the above commands as well as in *kubernetes/flask-deployment.yml*.
 
 Create the deployment:
 ```
