@@ -18,13 +18,28 @@ def recreate_db():
 @cli.command('seed_db')
 def seed_db():
     """Seeds the database."""
-    db.session.add(Flashcard(
-        chinese='吃了嗎？',
-        english='Have you eaten?'
-    ))
-    db.session.add(Flashcard(
-        chinese='去哪裡啊?',
-        english='Where are you headed?'
+    flashcards = [
+        {
+            'chinese': '吃了嗎？',
+            'english': 'Have you eaten?'
+        },
+        {
+            'chinese': '去哪裡啊？',
+            'english': 'Where\'re ya headed?'
+        },
+        {
+            'chinese': '你來對了地方。',
+            'english': 'You\'ve come to the right place.'
+        },
+        {
+            'chinese': '屁啦！',
+            'english': 'Nonsense!'
+        }
+    ]
+    for flashcard in flashcards:
+        db.session.add(Flashcard(
+            chinese=flashcard['chinese'],
+            english=flashcard['english']
     ))
     db.session.commit()
 
