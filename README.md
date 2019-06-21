@@ -90,6 +90,13 @@ Create the service:
 kubectl create -f ./kubernetes/flask-service.yml
 ```
 
+Apply the migrations and seed the database:
+```
+kubectl get pods
+kubectl exec flask-<POD_IDENTIFIER> --stdin --tty -- python manage.py recreate_db
+kubectl exec flask-<POD_IDENTIFIER> --stdin --tty -- python manage.py seed_db
+```
+
 #### Nginx
 
 Build and push the image to Docker Hub:
@@ -102,17 +109,10 @@ docker push $SOME_DOCKER_HUB_NAMESPACE/flashcards-nginx
 
 Create the deployment:
 ```
-kubectl create -f ./kubernetes/flask-deployment.yml
+kubectl create -f ./kubernetes/nginx-deployment.yml
 ```
 
 Create the service:
 ```
-kubectl create -f ./kubernetes/flask-service.yml
-```
-
-Apply the migrations and seed the database:
-```
-kubectl get pods
-kubectl exec flask-<POD_IDENTIFIER> --stdin --tty -- python manage.py recreate_db
-kubectl exec flask-<POD_IDENTIFIER> --stdin --tty -- python manage.py seed_db
+kubectl create -f ./kubernetes/nginx-service.yml
 ```
