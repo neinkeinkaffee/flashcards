@@ -18,13 +18,13 @@ spec:
           - name: POSTGRES_USER
             valueFrom:
               secretKeyRef:
-                name: postgres-credentials
-                key: user
+                name: flashcards-credentials
+                key: postgresUser
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: postgres-credentials
-                key: password
+                name: flashcards-credentials
+                key: postgresPassword
         volumeMounts:
           - name: postgres-volume-mount
             mountPath: /var/lib/postgresql/data
