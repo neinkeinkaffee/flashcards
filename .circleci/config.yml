@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/services/server
     docker:
       - image: circleci/python:3.7.2
     steps:
@@ -19,7 +18,7 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            pip install -r requirements.txt
+            pip install -r ./services/server/requirements.txt
 
       - save_cache:
           paths:
@@ -40,7 +39,7 @@ jobs:
       - run:
           command: |
             docker run --rm --privileged multiarch/qemu-user-static:register
-            docker build -t $DOCKER_HUB_NAMESPACE/flashcards-nginx .
+            docker build -t $DOCKER_HUB_NAMESPACE/flashcards-nginx ./services/server
             docker push $DOCKER_HUB_NAMESPACE/flashcards-nginx
 
 
