@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/services/server
     docker:
       - image: circleci/python:3.7.2
     steps:
@@ -39,7 +40,7 @@ jobs:
       - run:
           command: |
             docker run --rm --privileged multiarch/qemu-user-static:register
-            docker build -t $DOCKER_HUB_NAMESPACE/flashcards-nginx ./services/server
+            docker build -t $DOCKER_HUB_NAMESPACE/flashcards-nginx .
             docker push $DOCKER_HUB_NAMESPACE/flashcards-nginx
 
 
