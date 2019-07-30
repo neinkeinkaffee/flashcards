@@ -38,6 +38,7 @@ jobs:
       - setup_remote_docker:
       - run:
           command: |
+            echo $DOCKER_HUB_PASSWORD | base64 --decode | docker login --username $DOCKER_HUB_NAMESPACE --password-stdin
             docker run --rm --privileged multiarch/qemu-user-static:register
             docker build -t $DOCKER_HUB_NAMESPACE/flashcards-nginx ./services/server
             docker push $DOCKER_HUB_NAMESPACE/flashcards-nginx
