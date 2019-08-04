@@ -31,7 +31,7 @@ jobs:
       - setup_remote_docker:
       - add_ssh_keys
       - run:
-          command:
+          command: |
 #          command: |
 #            echo $DOCKER_HUB_PASSWORD | base64 --decode | docker login --username $DOCKER_HUB_NAMESPACE --password-stdin
 #            docker run --rm --privileged multiarch/qemu-user-static:register
