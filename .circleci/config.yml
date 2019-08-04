@@ -31,13 +31,14 @@ jobs:
       - setup_remote_docker:
       - add_ssh_keys
       - run:
-          command:
-#          command: |
-#            echo $DOCKER_HUB_PASSWORD | base64 --decode | docker login --username $DOCKER_HUB_NAMESPACE --password-stdin
-#            docker run --rm --privileged multiarch/qemu-user-static:register
-#            docker build -t $DOCKER_HUB_NAMESPACE/flashcards-nginx ./services/server
-#            docker push $DOCKER_HUB_NAMESPACE/flashcards-nginx
+          command: |
+            echo $DOCKER_HUB_PASSWORD | base64 --decode | docker login --username $DOCKER_HUB_NAMESPACE --password-stdin
+            docker run --rm --privileged multiarch/qemu-user-static:register
+            docker build -t $DOCKER_HUB_NAMESPACE/flashcards-flask ./services/server
+            docker push $DOCKER_HUB_NAMESPACE/flashcards-flask
             ssh -t -o "StrictHostKeyChecking no" $PROXY_USER@$PROXY_HOST ssh $DEPLOY_USER@$DEPLOY_HOST kubectl get pods
+            ssh -t -o "StrictHostKeyChecking no" $PROXY_USER@$PROXY_HOST ssh $DEPLOY_USER@$DEPLOY_HOST docker pull $DOCKER_HUB_NAMESPACE/flashcards-flask
+
 
 
 
