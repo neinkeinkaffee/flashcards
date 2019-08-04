@@ -29,6 +29,8 @@ jobs:
 #          destination: test-reports
 
       - setup_remote_docker:
+      - add_ssh_keys:
+          fingerprints:
       - run:
           command: |
             echo $DOCKER_HUB_PASSWORD | base64 --decode | docker login --username $DOCKER_HUB_NAMESPACE --password-stdin
