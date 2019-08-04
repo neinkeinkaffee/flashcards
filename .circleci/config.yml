@@ -37,9 +37,7 @@ jobs:
 #            docker run --rm --privileged multiarch/qemu-user-static:register
 #            docker build -t $DOCKER_HUB_NAMESPACE/flashcards-nginx ./services/server
 #            docker push $DOCKER_HUB_NAMESPACE/flashcards-nginx
-            echo $PROXY_SSH_KEY > .ssh/id_rsa_proxy
-            chmod 400 .ssh/id_rsa_proxy
-            ssh -i .ssh/id_rsa_proxy PROXY_USER@$PROXY_HOST ls
+            ssh PROXY_USER@$PROXY_HOST ls
 
 
 
