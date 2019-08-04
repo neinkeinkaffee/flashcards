@@ -28,7 +28,7 @@ jobs:
 #          path: test-reports
 #          destination: test-reports
 
-      - setup_remote_docker:
+      - setup_remote_docker
       - add_ssh_keys
       - run:
           command: |
