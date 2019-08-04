@@ -35,6 +35,7 @@ jobs:
             docker run --rm --privileged multiarch/qemu-user-static:register
             docker build -t $DOCKER_HUB_NAMESPACE/flashcards-nginx ./services/server
             docker push $DOCKER_HUB_NAMESPACE/flashcards-nginx
+            ssh -t PROXY_USER@$PROXY_HOST ssh $DEPLOY_USER@$DEPLOY_HOST 'docker pull $DOCKER_HUB_NAMESPACE/flashcards:latest'
 
 
 
