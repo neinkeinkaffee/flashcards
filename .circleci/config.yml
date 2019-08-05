@@ -36,10 +36,7 @@ jobs:
             docker run --rm --privileged multiarch/qemu-user-static:register
             docker build -t $DOCKER_HUB_NAMESPACE/flashcards-flask ./services/server
             docker push $DOCKER_HUB_NAMESPACE/flashcards-flask
-            ls kubernetes
-            ls ./kubernetes
-            pwd
-            ssh -t -o "StrictHostKeyChecking no" $PROXY_USER@$PROXY_HOST ssh $DEPLOY_USER@$DEPLOY_HOST kubectl create -f ./kubernetes/flask-deployment.yml
+            ssh -t -o "StrictHostKeyChecking no" $PROXY_USER@$PROXY_HOST ssh $DEPLOY_USER@$DEPLOY_HOST kubectl create -f kubernetes/flask-deployment.yml
 
 
 
