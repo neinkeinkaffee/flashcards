@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-alias pi_exec='ssh -t -o "StrictHostKeyChecking no" $PROXY_USER@$PROXY_HOST ssh $DEPLOY_USER@$DEPLOY_HOST'
+function pi_exec() {
+    ssh -t -o "StrictHostKeyChecking no" $PROXY_USER@$PROXY_HOST ssh $DEPLOY_USER@$DEPLOY_HOST "$@"
+}
 
 # Credits go to https://advancedweb.hu/2019/04/02/sg_allow_ip/
 function open_port() {

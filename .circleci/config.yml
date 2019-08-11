@@ -41,7 +41,7 @@ jobs:
           command: |
             sudo pip install awscli
             . scripts/lib.sh
-            open_port 22
+            open_port $CI_PORT
             pi_exec ls
 
 
