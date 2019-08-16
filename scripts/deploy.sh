@@ -3,4 +3,4 @@ set -eox pipefail
 
 . ./scripts/lib.sh
 
-kubectl_apply secret.yml
+kubectl_apply secret.yml flask-deployment.yml
