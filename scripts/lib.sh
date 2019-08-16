@@ -9,14 +9,6 @@ function copy_to_pi() {
     scp -o ProxyCommand="ssh -W %h:%p $PROXY_USER@$PROXY_HOST" -o "StrictHostKeyChecking no" $FILE $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_DIR
 }
 
-function kubectl_apply() {
-    TEMPLATE_FILE=$1
-    open_port $CI_PORT
-    copy_to_pi ./kubernetes/$TEMPLATE_FILE
-    exec_on_pi kubectl apply -f $TEMPLATE_FILE
-    exec_on_pi rm $TEMPLATE_FILE
-}
-
 # Credits go to https://advancedweb.hu/2019/04/02/sg_allow_ip/
 function open_port() {
     PORT=$1
