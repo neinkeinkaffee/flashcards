@@ -4,6 +4,13 @@ function pi_exec() {
     ssh -t -o "StrictHostKeyChecking no" $PROXY_USER@$PROXY_HOST ssh $DEPLOY_USER@$DEPLOY_HOST "$@"
 }
 
+function kubectl_apply() {
+    TEMPLATE_FILE=$1
+    cat <<EOF | kubectl apply -f -
+$(cat $TEMPLATE_FILE)
+EOF
+}
+
 # Credits go to https://advancedweb.hu/2019/04/02/sg_allow_ip/
 function open_port() {
     PORT=$1
