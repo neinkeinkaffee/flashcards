@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eox pipefail
 
-. ./lib.sh
+. ./scripts/lib.sh
 
 open_port $CI_PORT
 exec_on_pi kubectl get pods
