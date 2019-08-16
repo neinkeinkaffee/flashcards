@@ -34,7 +34,7 @@ jobs:
             docker run --rm --privileged multiarch/qemu-user-static:register
             docker build -t $DOCKER_HUB_NAMESPACE/flashcards-nginx ./services/client
             echo $DOCKER_HUB_PASSWORD | base64 --decode | docker login --username $DOCKER_HUB_NAMESPACE --password-stdin
-            docker push $DOCKER_HUB_NAMESPACE/flashcards-flask
+            docker push $DOCKER_HUB_NAMESPACE/flashcards-nginx
 
       - run:
           name: Install awscli
