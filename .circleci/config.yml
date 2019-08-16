@@ -41,8 +41,12 @@ jobs:
           command: sudo pip install awscli
 
       - run:
-          name: Deploy service
-          command: . ./scripts/lib.sh && kubectl_apply secret.yml flask-deployment.yml
+          name: Source utility functions
+          command: . ./scripts/lib.sh
+
+      - run:
+          name: Deploy server
+          command: kubectl_apply flask-deployment.yml flask-service.yml
 
 
 
