@@ -37,9 +37,12 @@ jobs:
 #            docker push $DOCKER_HUB_NAMESPACE/flashcards-flask
 
       - run:
+          name: Install awscli
+          command: sudo pip install awscli
+
+      - run:
           name: Deploy service
           command: |
-            sudo pip install awscli
             . scripts/lib.sh
             open_port $CI_PORT
             exec_on_pi kubectl get pods
