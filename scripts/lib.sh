@@ -50,9 +50,11 @@ function close_port() {
 function kubectl_apply() {
     for FILE in "$@"
     do
+        open_port $CI_PORT
         exec_on_pi kubectl get pods
         copy_to_pi ./kubernetes/$FILE
         exec_on_pi kubectl apply -f $FILE
         exec_on_pi rm $FILE
+        close_port $CI_PORT
     done
 }
