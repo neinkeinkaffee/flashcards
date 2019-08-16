@@ -42,7 +42,8 @@ jobs:
             sudo pip install awscli
             . scripts/lib.sh
             open_port $CI_PORT
-            pi_exec ls
+            pi_exec kubectl get pods
+            pi_exec kubectl_apply ./kubernetes/secret.yml
 
 
 
