@@ -42,7 +42,7 @@ jobs:
 
       - run:
           name: Deploy secrets and server
-          command: ./deploy.sh
+          command: ./scripts/deploy.sh
 
 
 
