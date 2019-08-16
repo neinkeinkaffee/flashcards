@@ -28,17 +28,21 @@ jobs:
 
       - add_ssh_keys
 
-#      - run:
-#          name: Build and push Docker image
-#          command: |
-#            docker run --rm --privileged multiarch/qemu-user-static:register
-#            docker build -t $DOCKER_HUB_NAMESPACE/flashcards-flask ./services/server
-#            echo $DOCKER_HUB_PASSWORD | base64 --decode | docker login --username $DOCKER_HUB_NAMESPACE --password-stdin
-#            docker push $DOCKER_HUB_NAMESPACE/flashcards-flask
+      - run:
+          name: Build and push Docker image
+          command: |
+            docker run --rm --privileged multiarch/qemu-user-static:register
+            docker build -t $DOCKER_HUB_NAMESPACE/flashcards-flask ./services/server
+            echo $DOCKER_HUB_PASSWORD | base64 --decode | docker login --username $DOCKER_HUB_NAMESPACE --password-stdin
+            docker push $DOCKER_HUB_NAMESPACE/flashcards-flask
 
       - run:
           name: Install awscli
           command: sudo pip install awscli
+
+      - run:
+          name: Deploy secrets
+          command: . ./scripts/lib.sh && kubectl_apply secret.yml
 
       - run:
           name: Deploy server
