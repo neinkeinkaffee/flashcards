@@ -43,7 +43,8 @@ jobs:
             . scripts/lib.sh
             open_port $CI_PORT
             pi_exec kubectl get pods
-            pi_exec kubectl_apply ./kubernetes/secret.yml
+            copy_to_pi ./kubernetes/secret.yml
+            pi_exec kubectl apply -f secret.yml
 
 
 

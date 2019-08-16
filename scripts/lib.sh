@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
 
-function pi_exec() {
+function exec_on_pi() {
     ssh -t -o "StrictHostKeyChecking no" $PROXY_USER@$PROXY_HOST ssh $DEPLOY_USER@$DEPLOY_HOST "$@"
 }
 
-function kubectl_apply() {
-    TEMPLATE_FILE=$1
-    cat <<EOF | kubectl apply -f -
-$(cat $TEMPLATE_FILE)
-EOF
+function copy_to_pi() {
+    FILE=$1
+    scp -o ProxyCommand="ssh -W %h:%p $PROXY_USER@$PROXY_HOST" -o "StrictHostKeyChecking no" $FILE $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_DIR
 }
 
 # Credits go to https://advancedweb.hu/2019/04/02/sg_allow_ip/
