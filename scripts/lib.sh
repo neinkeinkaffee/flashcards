@@ -10,14 +10,15 @@ function copy_to_pi() {
 }
 
 function kubectl_apply() {
+    open_port $CI_PORT
     for FILE in "$@"
     do
-        open_port $CI_PORT
         exec_on_pi kubectl get pods
         copy_to_pi ./kubernetes/$FILE
         exec_on_pi kubectl apply -f $FILE
         exec_on_pi rm $FILE
     done
+    close_port $CI_PORT
 }
 
 # Credits go to https://advancedweb.hu/2019/04/02/sg_allow_ip/
