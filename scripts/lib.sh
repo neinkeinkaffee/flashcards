@@ -44,7 +44,7 @@ function close_port() {
 
     # Revoke access for currently allowed IP ranges
     for ip in $CIDRS; do
-        [ "$MYIP/32" != "$ip" ] && aws ec2 revoke-security-group-ingress \
+        aws ec2 revoke-security-group-ingress \
             --group-id $SG --protocol tcp --port $PORT --cidr $ip
     done
 }
