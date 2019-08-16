@@ -5,31 +5,31 @@ function exec_on_pi() {
 }
 
 function copy_to_pi() {
-    FILE=$1
+    local FILE=$1
     scp -o ProxyCommand="ssh -W %h:%p $PROXY_USER@$PROXY_HOST" -o "StrictHostKeyChecking no" $FILE $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_DIR
 }
 
 function kubectl_apply() {
-    TEMPLATE_FILE=$1
+    local FILE=$1
     open_port $CI_PORT
     exec_on_pi kubectl get pods
-    copy_to_pi ./kubernetes/$TEMPLATE_FILE
-    exec_on_pi kubectl apply -f $TEMPLATE_FILE
-    exec_on_pi rm $TEMPLATE_FILE
+    copy_to_pi ./kubernetes/$FILE
+    exec_on_pi kubectl apply -f $FILE
+    exec_on_pi rm $FILE
 }
 
 # Credits go to https://advancedweb.hu/2019/04/02/sg_allow_ip/
 function open_port() {
-    PORT=$1
+    local PORT=$1
 
     echo "Find the ID of the EC2 instance's security group"
-    SG=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=proxy" \
+    local SG=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=proxy" \
     --query "Reservations[].Instances[].SecurityGroups[].GroupId" \
     --no-paginate | jq -r '.[0]')
 
     # Find the public IP of this machine
     while : ; do
-        MYIP=$(curl -s ifconfig.me)
+        local MYIP=$(curl -s ifconfig.me)
         [ -z "$MYIP" ] || break
     done
 
@@ -39,15 +39,15 @@ function open_port() {
 }
 
 function close_port() {
-    PORT=$1
+    local PORT=$1
 
     # Find the ID of the EC2 instance's security group
-    SG=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=proxy" \
+    local SG=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=proxy" \
     --query "Reservations[].Instances[].SecurityGroups[].GroupId" \
     --no-paginate | jq -r '.[0]')
 
     # Find currently allowed IP ranges (variable interpolation in jq isn't working as documented)
-    CIDRS=$(aws ec2 describe-security-groups --group-ids $SG \
+    local CIDRS=$(aws ec2 describe-security-groups --group-ids $SG \
         | jq -r '.SecurityGroups[].IpPermissions[]
         | select(.FromPort == env.PORT and .ToPort == env.PORT and .IpProtocol == "tcp") | .IpRanges[].CidrIp')
 
