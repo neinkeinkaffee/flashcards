@@ -56,11 +56,3 @@ function close_port() {
             --group-id $SG --protocol tcp --port $PORT --cidr $ip
     done
 }
-
-function kubectl_apply() {
-    TEMPLATE_FILE=$1
-
-    cat <<EOF | kubectl apply -f -
-$(cat $TEMPLATE_FILE)
-EOF
-}
