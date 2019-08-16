@@ -2,5 +2,7 @@
 set -eox pipefail
 
 . ./scripts/lib.sh
-#kubectl_apply secret.yml
+open_port $CI_PORT
+kubectl_apply secret.yml
 kubectl_apply flask-deployment.yml flask-service.yml
+close_port $CI_PORT
