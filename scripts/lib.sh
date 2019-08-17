@@ -38,8 +38,8 @@ function close_port() {
 
     echo "Find currently allowed IP ranges"
     local CIDRS=$(aws ec2 describe-security-groups --group-ids $SG \
-        | PORT="$PORT" jq -r '.SecurityGroups[].IpPermissions[]
-        | select(.FromPort == env.PORT and .ToPort == env.PORT and .IpProtocol == "tcp") | .IpRanges[].CidrIp')
+        | jq -r --argjson PORT "$PORT" '.SecurityGroups[].IpPermissions[]
+        | select(.FromPort == $PORT and .ToPort == $PORT and .IpProtocol == "tcp") | .IpRanges[].CidrIp')
 
     echo "Revoke access for currently allowed IP ranges"
     for ip in $CIDRS; do
