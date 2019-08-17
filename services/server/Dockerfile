@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 # Install dependencies
 COPY ./requirements.txt /usr/src/app/requirements.txt
 RUN apk update && apk add libpq && \
-    apk add --virtual .build-deps gcc python3-dev musl-dev postgresql-dev && \
+    apk add --virtual .build-deps gcc python3 python3-dev musl-dev postgresql-dev && \
     pip3 install -r requirements.txt && \
     apk del .build-deps
 
