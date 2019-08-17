@@ -57,9 +57,8 @@ function kubectl_apply() {
     done
 }
 
-function build_and_push() {
-    local DOCKER_FILE_DIR=$1
-    local IMAGE_NAME=$2
+function copy_qemu_bin {
+    DOCKER_FILE_DIR=$1
 
     docker run --rm --privileged multiarch/qemu-user-static:register
     if [ ! -f qemu-arm-static ]; then
@@ -67,7 +66,27 @@ function build_and_push() {
         tar -xvf x86_64_qemu-arm-static.tar.gz
     fi
     cp qemu-arm-static $DOCKER_FILE_DIR
+}
+
+function build_image() {
+    local DOCKER_FILE_DIR=$1
+    local IMAGE_NAME=$2
+
     docker build -t $DOCKER_HUB_NAMESPACE/$IMAGE_NAME $DOCKER_FILE_DIR
+}
+
+function push_image() {
+    local IMAGE_NAME=$2
+
     echo $DOCKER_HUB_PASSWORD | base64 --decode | docker login --username $DOCKER_HUB_NAMESPACE --password-stdin
     docker push $DOCKER_HUB_NAMESPACE/$IMAGE_NAME
+}
+
+function build_and_push() {
+    local DOCKER_FILE_DIR=$1
+    local IMAGE_NAME=$2
+
+    copy_qemu_bin $DOCKER_FILE_DIR
+    build_image $DOCKER_FILE_DIR $IMAGE_NAME
+    push_image $IMAGE_NAME
 }
