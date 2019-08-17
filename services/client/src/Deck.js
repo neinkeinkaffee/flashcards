@@ -1,6 +1,6 @@
 function Deck() {
     this.cards = []
-    fetch(API_BASE_URL + '/flashcards')
+    fetch($API_BASE_URL + '/flashcards')
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -14,7 +14,7 @@ Deck.prototype.add = function(chinese, english) {
         'english': english
     }
     console.log(JSON.stringify(card))
-    fetch(API_BASE_URL + '/flashcards', {
+    fetch($API_BASE_URL + '/flashcards', {
         method: 'POST',
         body: JSON.stringify(card), // string or object
         headers: {
@@ -41,7 +41,7 @@ Deck.prototype.generateUUID = function() {
     return uuid;
 }
 Deck.prototype.random = function() {
-    return fetch(API_BASE_URL + '/flashcards')
+    return fetch($API_BASE_URL + '/flashcards')
         .then(response => response.json())
         .then(data => data['flashcards'])
         .then(flashcards => {
