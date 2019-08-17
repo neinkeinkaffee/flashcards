@@ -1,9 +1,22 @@
-FROM nginx:alpine
-COPY src /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
-RUN apk --no-cache add openssl && \
+FROM arm32v6/alpine:3.7
+COPY qemu-arm-static /usr/bin/
+
+# Install dependencies
+RUN apk --no-cache --update add nginx &&\
+    mkdir -p /run/nginx && \
+    apk add gettext libintl && \
+    apk --no-cache add openssl && \
     openssl req -x509 -newkey rsa:4096 -keyout /etc/ssl/private/snakeoil-key.pem -out /etc/ssl/snakeoil-cert.pem -days 365 -nodes -subj '/CN=localhost' && \
     apk del --purge openssl
-CMD envsubst < /usr/share/nginx/html/src/services/client/src/Deck.js > /usr/share/nginx/html/src/services/client/src/Deck.js.tmp \
- && mv /usr/share/nginx/html/src/services/client/src/Deck.js.tmp /usr/share/nginx/html/src/services/client/src/Deck.js \
- && nginx -g 'daemon off;'
+
+# Configure nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Add app
+COPY src /usr/share/nginx/html
+
+# Inject urls and run server
+CMD ls /usr/share/nginx/html/src && \
+    envsubst < /usr/share/nginx/html/Deck.js > /usr/share/nginx/html/Deck.js.tmp && \
+    mv /usr/share/nginx/html/Deck.js.tmp /usr/share/nginx/html/Deck.js && \
+    nginx -g 'daemon off;'

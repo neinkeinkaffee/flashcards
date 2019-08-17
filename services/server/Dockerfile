@@ -1,24 +1,22 @@
-# base image
-FROM python:3.7.2-slim
+FROM arm32v6/alpine:3.7
+COPY qemu-arm-static /usr/bin/
 
-# install netcat
-RUN apt-get update && \
-    apt-get -y install netcat libpq-dev gcc && \
-    apt-get clean
-
-# set working directory
+# Set working directory
 WORKDIR /usr/src/app
 
-# add and install requirements
+# Install dependencies
 COPY ./requirements.txt /usr/src/app/requirements.txt
-RUN pip install -r requirements.txt
+RUN apk update && apk add libpq && \
+    apk add --virtual .build-deps gcc python3-dev musl-dev postgresql-dev && \
+    pip3 install -r requirements.txt && \
+    apk del .build-deps
 
-# add entrypoint.sh
+# Add entrypoint.sh
 COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
 RUN chmod +x /usr/src/app/entrypoint.sh
 
-# add app
+# Add app
 COPY . /usr/src/app
 
-# run server
+# Run server
 CMD ["/usr/src/app/entrypoint.sh"]
