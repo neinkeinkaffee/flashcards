@@ -6,16 +6,6 @@ Many thanks to
 https://github.com/testdrivenio/flask-vue-kubernetes
 from where the backend with flask and postgres, the docker integration as well as the structure of this project have been adapted. 
 
-### Before you run the app
-
-Proper secret injection remains to be implemented.
-For now, export the url of the flask backend into a bash variable and use sed to replace its occurrences before starting up the app.
-```
-export API_BASE_URL=https://localhost
-sed -i "s#API_BASE_URL#'$API_BASE_URL'#g" services/client/src/Deck.js # Linux
-sed -i "" "s#API_BASE_URL#'$API_BASE_URL'#g" services/client/src/Deck.js # Mac OS
-```
-
 ### Run with docker-compose
 
 To run this application with docker-compose
