@@ -10,5 +10,5 @@ spec:
   resources:
     requests:
       storage: 2Gi
-  volumeName: postgres-pv
+  volumeName: postgres-pv-hostpath
   storageClassName: standard
