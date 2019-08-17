@@ -56,3 +56,18 @@ function kubectl_apply() {
         exec_on_pi rm $FILE
     done
 }
+
+function build_and_push() {
+    local DOCKER_FILE_DIR=$1
+    local IMAGE_NAME=$2
+
+    docker run --rm --privileged multiarch/qemu-user-static:register
+    if [ ! -f qemu-arm-static ]; then
+        wget -N https://github.com/multiarch/qemu-user-static/releases/download/v2.9.1-1/x86_64_qemu-arm-static.tar.gz
+        tar -xvf x86_64_qemu-arm-static.tar.gz
+    fi
+    cp qemu-arm-static $DOCKER_FILE_DIR
+    docker build -t $DOCKER_HUB_NAMESPACE/$IMAGE_NAME $DOCKER_FILE_DIR
+    echo $DOCKER_HUB_PASSWORD | base64 --decode | docker login --username $DOCKER_HUB_NAMESPACE --password-stdin
+    docker push $DOCKER_HUB_NAMESPACE/$IMAGE_NAME
+}
