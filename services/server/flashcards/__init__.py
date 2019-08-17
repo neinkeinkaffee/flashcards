@@ -5,11 +5,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask_migrate import Migrate
 
-
 # instantiate the extensions
 db = SQLAlchemy()
 migrate = Migrate()
-
 
 def create_app(script_info=None):
 
@@ -28,7 +26,7 @@ def create_app(script_info=None):
     migrate.init_app(app, db)
 
     # register blueprints
-    from project.api.flashcards import flashcards_blueprint
+    from flashcards.api.flashcards import flashcards_blueprint
     app.register_blueprint(flashcards_blueprint)
 
     # shell context for flask cli

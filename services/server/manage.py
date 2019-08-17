@@ -1,7 +1,7 @@
 from flask.cli import FlaskGroup
 
-from project import create_app, db
-from project.api.models import Flashcard
+from flashcards import create_app, db
+from flashcards.api.models import Flashcard
 
 
 app = create_app()

@@ -2,8 +2,8 @@ import os
 
 from flask import Blueprint, jsonify, request
 
-from project.api.models import Flashcard
-from project import db
+from flashcards.api.models import Flashcard
+from flashcards import db
 
 
 flashcards_blueprint = Blueprint('flashcards', __name__)

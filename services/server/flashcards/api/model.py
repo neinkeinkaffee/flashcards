@@ -1,9 +1,4 @@
-import datetime
-
-from flask import current_app
-from sqlalchemy.sql import func
-
-from project import db
+from flashcards import db
 
 class Flashcard(db.Model):
 
