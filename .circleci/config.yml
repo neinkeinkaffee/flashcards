@@ -34,10 +34,10 @@ jobs:
             docker run --rm --privileged multiarch/qemu-user-static:register
             wget -N https://github.com/multiarch/qemu-user-static/releases/download/v2.9.1-1/x86_64_qemu-arm-static.tar.gz
             tar -xvf x86_64_qemu-arm-static.tar.gz
-            cp qemu-arm-static ./services/client/
-            docker build -t $DOCKER_HUB_NAMESPACE/flashcards-nginx ./services/client
+            cp qemu-arm-static ./services/server/
+            docker build -t $DOCKER_HUB_NAMESPACE/flashcards-flask ./services/server
             echo $DOCKER_HUB_PASSWORD | base64 --decode | docker login --username $DOCKER_HUB_NAMESPACE --password-stdin
-            docker push $DOCKER_HUB_NAMESPACE/flashcards-nginx
+            docker push $DOCKER_HUB_NAMESPACE/flashcards-flask
 
       - run:
           name: Install awscli
