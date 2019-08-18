@@ -26,7 +26,7 @@ def create_app(script_info=None):
     migrate.init_app(app, db)
 
     # register blueprints
-    from flashcards.api.flashcards import flashcards_blueprint
+    from flashcards.api.controller import flashcards_blueprint
     app.register_blueprint(flashcards_blueprint)
 
     # shell context for flask cli
