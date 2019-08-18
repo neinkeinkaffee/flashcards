@@ -52,7 +52,7 @@ function kubectl_apply() {
     do
         exec_on_pi kubectl get pods
         copy_to_pi ./kubernetes/$FILE
-        exec_on_pi kubectl replace -f $FILE
+        exec_on_pi kubectl apply -f $FILE
         exec_on_pi rm $FILE
     done
 }
