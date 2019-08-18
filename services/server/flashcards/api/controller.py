@@ -2,7 +2,7 @@ import os
 
 from flask import Blueprint, jsonify, request
 
-from flashcards.api.models import Flashcard
+from flashcards.api.model import Flashcard
 from flashcards import db
 
 
