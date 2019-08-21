@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from flask.cli import FlaskGroup
 
 from flashcards import create_app, db
