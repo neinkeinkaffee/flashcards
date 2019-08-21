@@ -57,6 +57,12 @@ function kubectl_apply() {
     done
 }
 
+function kubectl_delete_pod() {
+    POD_NAME=$1
+    POD_ID=$(exec_on_pi kubectl get pods | grep -o $POD_NAME-[-0-9a-z]*)
+    kubectl delete pod $POD_ID
+}
+
 function copy_qemu_bin {
     DOCKER_FILE_DIR=$1
 
