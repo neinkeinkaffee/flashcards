@@ -81,14 +81,6 @@ function build_image() {
     docker build --build-arg BASE_URL=$BASE_URL -t $DOCKER_HUB_NAMESPACE/$IMAGE_NAME $DOCKER_FILE_DIR
 }
 
-function build_image_with_args() {
-    local DOCKER_FILE_DIR=$1
-    local IMAGE_NAME=$2
-    local BUILD_ARG=$3
-
-    docker build --build-arg $BUILD_ARG=\$$BUILD_ARG -t $DOCKER_HUB_NAMESPACE/$IMAGE_NAME $DOCKER_FILE_DIR
-}
-
 function push_image() {
     local IMAGE_NAME=$1
 
