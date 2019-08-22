@@ -1,17 +1,17 @@
-import os, pytest
+import os
 
 from flashcards import create_app, db
 from flashcards.api.model import Flashcard
 
 os.environ['APP_SETTINGS'] = 'flashcards.config.TestConfig'
 
-def setup_function(function):
+def setup_function():
     app = create_app()
     ctx = app.app_context()
     ctx.push()
     db.create_all()
 
-def teardown_function(function):
+def teardown_function():
     db.drop_all()
     db.create_all()
     db.session.commit()
