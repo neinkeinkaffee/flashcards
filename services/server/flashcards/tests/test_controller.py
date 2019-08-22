@@ -20,7 +20,6 @@ def test_get_all_flashcards(mocker):
     }
     assert jsonify_mock.called_with(expected_response)
 
-
 def test_post_new_flashcard(mocker):
     app = create_app()
     app.testing = True
