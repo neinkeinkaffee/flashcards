@@ -1,13 +1,10 @@
 import os
-
 from flask import Blueprint, jsonify, request
 
 from flashcards.api.model import Flashcard
 from flashcards import db
 
-
 flashcards_blueprint = Blueprint('flashcards', __name__)
-
 
 @flashcards_blueprint.route('/flashcards', methods=['GET', 'POST'])
 def all_flashcards():
