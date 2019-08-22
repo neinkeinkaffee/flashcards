@@ -13,7 +13,6 @@ def setup_function():
 def teardown_function():
     db.drop_all()
     db.create_all()
-    db.session.commit()
 
 def test_adding_new_card():
     db.session.add(Flashcard(
