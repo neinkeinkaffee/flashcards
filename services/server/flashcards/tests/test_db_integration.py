@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import os
-
 from flashcards import create_app, db
 from flashcards.api.model import Flashcard
 
-os.environ['APP_SETTINGS'] = 'flashcards.config.TestConfig'
-
 def setup_function():
     app = create_app()
+    app.testing = True
     ctx = app.app_context()
     ctx.push()
     db.create_all()
