@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 
 from flashcards import create_app, db
