@@ -50,17 +50,17 @@ function close_port() {
 function kubectl_apply() {
     for FILE in "$@"
     do
-        exec_on_pi kubectl get pods
+        exec_on_pi sudo kubectl get pods
         copy_to_pi ./kubernetes/$FILE
-        exec_on_pi kubectl apply -f $FILE
+        exec_on_pi sudo kubectl apply -f $FILE
         exec_on_pi rm $FILE
     done
 }
 
 function kubectl_delete_pod() {
     POD_NAME=$1
-    POD_ID=$(exec_on_pi kubectl get pods | grep -o $POD_NAME-[-0-9a-z]*)
-    kubectl delete pod $POD_ID
+    POD_ID=$(exec_on_pi sudo kubectl get pods | grep -o $POD_NAME-[-0-9a-z]*)
+    sudo kubectl delete pod $POD_ID
 }
 
 function copy_qemu_bin {
