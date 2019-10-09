@@ -16,4 +16,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY src /usr/share/nginx/html
 
 # Run server
-CMD nginx -g 'daemon off;'
+CMD  envsubst < /usr/share/nginx/html/Deck.js > /usr/share/nginx/html/Deck.js.tmp && \
+     mv /usr/share/nginx/html/Deck.js.tmp /usr/share/nginx/html/Deck.js && \
+     nginx -g 'daemon off;'
