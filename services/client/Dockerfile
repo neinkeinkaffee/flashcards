@@ -15,7 +15,5 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # Add app
 COPY src /usr/share/nginx/html
 
-# Inject urls and run server
-CMD envsubst < /usr/share/nginx/html/Deck.js > /usr/share/nginx/html/Deck.js.tmp && \
-    mv /usr/share/nginx/html/Deck.js.tmp /usr/share/nginx/html/Deck.js && \
-    nginx -g 'daemon off;'
+# Run server
+CMD nginx -g 'daemon off;'
