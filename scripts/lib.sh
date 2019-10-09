@@ -70,7 +70,7 @@ function kubectl_delete_pod() {
 }
 
 function copy_qemu_bin {
-    DOCKER_FILE_DIR=$1
+    local DOCKER_FILE_DIR=$1
 
     docker run --rm --privileged multiarch/qemu-user-static:register
     if [ ! -f qemu-arm-static ]; then
@@ -101,4 +101,12 @@ function build_and_push() {
     copy_qemu_bin $DOCKER_FILE_DIR
     build_image $DOCKER_FILE_DIR $IMAGE_NAME
     push_image $IMAGE_NAME
+}
+
+function kubectl_exec() {
+    local PARAMS=( ${@//\/ } )
+    local POD_NAME=${PARAMS[0]}
+    local COMMAND=${PARAMS[@]:1}
+    local POD_ID=grep_pod_id $POD_NAME
+    sudo kubectl exec $POD_ID --stdin --tty -- $COMMAND
 }
