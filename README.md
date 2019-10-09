@@ -115,8 +115,8 @@ kubectl create -f ./kubernetes/flask-service.yml
 Apply the migrations and seed the database:
 ```
 kubectl get pods
-kubectl exec flask-<POD_IDENTIFIER> --stdin --tty -- python manage.py recreate_db
-kubectl exec flask-<POD_IDENTIFIER> --stdin --tty -- python manage.py seed_db
+kubectl exec flask-<POD_IDENTIFIER> --stdin --tty -- python3 manage.py recreate_db
+kubectl exec flask-<POD_IDENTIFIER> --stdin --tty -- python3 manage.py seed_db
 ```
 
 #### Nginx
