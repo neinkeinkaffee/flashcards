@@ -19,6 +19,38 @@ docker-compose exec flask python manage.py recreate_db
 docker-compose exec flask python manage.py seed_db 
 ``` 
 
+Now you can visit `https://localhost` in your browser (you'll have to confirm that you want to proceed to a site with a self-signed certificate though). 
+You can also query the flask backend API (and pipe through `jq` for prettier view).
+```
+curl localhost:5000/flashcards
+{
+  "container_id": "4f87b82a81f7",
+  "flashcards": [
+    {
+      "chinese": "吃了嗎？",
+      "english": "Have you eaten?",
+      "id": 1
+    },
+    {
+      "chinese": "去哪裡啊？",
+      "english": "Where're ya headed?",
+      "id": 2
+    },
+    {
+      "chinese": "你來對了地方。",
+      "english": "You've come to the right place.",
+      "id": 3
+    },
+    {
+      "chinese": "屁啦！",
+      "english": "Nonsense!",
+      "id": 4
+    }
+  ],
+  "status": "success"
+}
+```
+
 ### Run with kubernetes
 
 (Adapted from https://github.com/testdrivenio/flask-vue-kubernetes.)
