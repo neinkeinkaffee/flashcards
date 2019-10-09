@@ -107,6 +107,6 @@ function kubectl_exec() {
     local PARAMS=( ${@//\/ } )
     local POD_NAME=${PARAMS[0]}
     local COMMAND=${PARAMS[@]:1}
-    local POD_ID=grep_pod_id $POD_NAME
+    local POD_ID=$(grep_pod_id $POD_NAME)
     sudo kubectl exec $POD_ID --stdin --tty -- $COMMAND
 }
