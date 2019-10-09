@@ -15,6 +15,7 @@ docker-compose up -d --build
 
 On a first time run, initialize the database with
 ``` 
+docker-compose exec postgres createdb -U postgres flashcards
 docker-compose exec flask python manage.py recreate_db
 docker-compose exec flask python manage.py seed_db 
 ``` 
