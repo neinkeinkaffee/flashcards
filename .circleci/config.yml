@@ -6,31 +6,25 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "./services/server/requirements.txt" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      - save_cache:
-          paths:
-            - ./venv
-          key: v1-dependencies-{{ checksum "./services/server/requirements.txt" }}
-
-#      - run:
-#          name: run tests
-#          command: |
-#            . venv/bin/activate
-#            python manage.py test
+      - run:
+          name: run tests
+          command: |
+            . venv/bin/activate
+            python manage.py test
 
       - setup_remote_docker:
-
-      - add_ssh_keys
 
       - run:
           name: Build and push Docker images
           command: ./scripts/build.sh
+
+  deploy:
+    docker:
+      - image: circleci/python:3.7.2
+    steps:
+      - checkout
+
+      - add_ssh_keys
 
       - run:
           name: Install awscli
