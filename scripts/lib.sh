@@ -47,6 +47,12 @@ function close_port() {
     done
 }
 
+function grep_pod_id() {
+    POD_NAME=$1
+    POD_ID=$(exec_on_pi sudo kubectl get pods | grep -o $POD_NAME-[-0-9a-z]*)
+    echo $POD_ID
+}
+
 function kubectl_apply() {
     for FILE in "$@"
     do
@@ -59,7 +65,7 @@ function kubectl_apply() {
 
 function kubectl_delete_pod() {
     POD_NAME=$1
-    POD_ID=$(exec_on_pi sudo kubectl get pods | grep -o $POD_NAME-[-0-9a-z]*)
+    POD_ID=$(grep_pod_id $POD_NAME)
     exec_on_pi sudo kubectl delete pod $POD_ID
 }
 
