@@ -108,5 +108,5 @@ function kubectl_exec() {
     local POD_NAME=${PARAMS[0]}
     local COMMAND=${PARAMS[@]:1}
     local POD_ID=$(grep_pod_id $POD_NAME)
-    exec_on_pi sudo kubectl exec $POD_ID --stdin --tty -- $COMMAND
+    exec_on_pi sudo kubectl exec -it $POD_ID $COMMAND
 }
