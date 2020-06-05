@@ -1,10 +1,13 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: flask
   labels:
     name: flask
 spec:
+  selector:
+    matchLabels:
+      app: flask
   replicas: 1
   template:
     metadata:
@@ -12,22 +15,22 @@ spec:
         app: flask
     spec:
       containers:
-      - name: flask
-        image: neinkeinkaffee/flashcards-flask:latest
-        imagePullPolicy: "Always"
-        env:
-        - name: FLASK_ENV
-          value: "development"
-        - name: APP_SETTINGS
-          value: "flashcards.config.DevelopmentConfig"
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: flashcards-credentials
-              key: postgresUser
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: flashcards-credentials
-              key: postgresPassword
+        - name: flask
+          image: neinkeinkaffee/flashcards-flask:latest
+          imagePullPolicy: "Always"
+          env:
+            - name: FLASK_ENV
+              value: "development"
+            - name: APP_SETTINGS
+              value: "flashcards.config.DevelopmentConfig"
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: flashcards-credentials
+                  key: postgresUser
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: flashcards-credentials
+                  key: postgresPassword
       restartPolicy: Always

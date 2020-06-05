@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres
@@ -6,30 +6,40 @@ metadata:
     name: database
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      service: postgres
   template:
     metadata:
       labels:
         service: postgres
     spec:
       containers:
-      - name: postgres
-        image: postgres:10.4-alpine
-        env:
-          - name: POSTGRES_USER
-            valueFrom:
-              secretKeyRef:
-                name: flashcards-credentials
-                key: postgresUser
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: flashcards-credentials
-                key: postgresPassword
-        volumeMounts:
-          - name: postgres-volume-mount
-            mountPath: /var/lib/postgresql/data
+        - name: postgres
+          image: postgres:9.6.16-alpine
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: flashcards-credentials
+                  key: postgresUser
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: flashcards-credentials
+                  key: postgresPassword
+          volumeMounts:
+            - name: postgres-volume-mount
+              mountPath: /var/lib/postgresql
+      initContainers:
+        - name: pgsql-data-permission-fix
+          image: busybox
+          command: ["/bin/chmod","-R","777", "/data"]
+          volumeMounts:
+            - name: postgres-volume-mount
+              mountPath: /data
       volumes:
-      - name: postgres-volume-mount
-        persistentVolumeClaim:
-          claimName: postgres-pvc-hostpath
+        - name: postgres-volume-mount
+          persistentVolumeClaim:
+            claimName: postgres-pvc
       restartPolicy: Always
