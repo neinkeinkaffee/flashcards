@@ -124,7 +124,7 @@ kubectl exec flask-<POD_IDENTIFIER> --stdin --tty -- python3 manage.py seed_db
 
 Build and push the image to Docker Hub:
 ```
-docker build -t $SOME_DOCKER_HUB_NAMESPACE/flashcards-nginx ./services/server
+docker build -t $SOME_DOCKER_HUB_NAMESPACE/flashcards-nginx ./services/client
 docker push $SOME_DOCKER_HUB_NAMESPACE/flashcards-nginx
 ```
 
