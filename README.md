@@ -97,7 +97,7 @@ kubectl exec postgres-<POD_IDENTIFIER> --stdin --tty -- createdb -U postgres fla
 
 Build and push the image to Docker Hub:
 ```
-docker build -t $SOME_DOCKER_HUB_NAMESPACE/flashcards-flask ./services/server
+docker build -t $SOME_DOCKER_HUB_NAMESPACE/flashcards-flask ./services/backend
 docker push $SOME_DOCKER_HUB_NAMESPACE/flashcards-flask
 ```
 
@@ -124,7 +124,7 @@ kubectl exec flask-<POD_IDENTIFIER> --stdin --tty -- python3 manage.py seed_db
 
 Build and push the image to Docker Hub:
 ```
-docker build -t $SOME_DOCKER_HUB_NAMESPACE/flashcards-nginx ./services/client
+docker build -t $SOME_DOCKER_HUB_NAMESPACE/flashcards-nginx ./services/frontend
 docker push $SOME_DOCKER_HUB_NAMESPACE/flashcards-nginx
 ```
 
