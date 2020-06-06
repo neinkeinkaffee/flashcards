@@ -6,7 +6,7 @@ Many thanks to
 https://github.com/testdrivenio/flask-vue-kubernetes
 from where the backend with flask and postgres, the docker integration as well as the structure of this project have been adapted. 
 
-### Run with docker-compose
+## Run with docker-compose
 
 To run this application with docker-compose
 ```
@@ -52,11 +52,11 @@ curl localhost:5000/flashcards
 }
 ```
 
-### Run with kubernetes
+## Run with kubernetes
 
 (Adapted from https://github.com/testdrivenio/flask-vue-kubernetes.)
 
-#### Volume
+### Volume
 
 Create the volume:
 ```
@@ -68,14 +68,14 @@ Create the volume claim:
 kubectl apply -f ./kubernetes/persistent-volume-claim.yml
 ```
 
-#### Secrets
+### Secrets
 
 Create the secret object:
 ```
 kubectl apply -f ./kubernetes/secret.yml
 ```
 
-#### Postgres
+### Postgres
 
 Create deployment:
 ```
@@ -93,7 +93,7 @@ kubectl get pods
 kubectl exec postgres-<POD_IDENTIFIER> --stdin --tty -- createdb -U postgres flashcards
 ```
 
-#### Flask
+### Flask
 
 Build and push the image to Docker Hub:
 ```
@@ -120,7 +120,7 @@ kubectl exec flask-<POD_IDENTIFIER> --stdin --tty -- python3 manage.py recreate_
 kubectl exec flask-<POD_IDENTIFIER> --stdin --tty -- python3 manage.py seed_db
 ```
 
-#### Nginx
+### Nginx
 
 Build and push the image to Docker Hub:
 ```
@@ -139,3 +139,8 @@ Create the service:
 ```
 kubectl create -f ./kubernetes/nginx-service.yml
 ```
+
+## Todos
+
+* Update README.md and ci scripts to interpolate secret values from environment when deploying secret.yml (`sed | kubectl apply -f -`)
+* Update docker-compose to interpolate base url from environment when starting up nginx (`envsubst`)
