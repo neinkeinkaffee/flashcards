@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: neinkeinkaffee/flashcards-nginx:latest
+          image: neinkeinkaffee/flashcards-nginx-tls:latest
           imagePullPolicy: "Always"
           env:
             - name: BASE_URL
