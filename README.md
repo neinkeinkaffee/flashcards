@@ -56,18 +56,6 @@ curl localhost:5000/flashcards
 
 (Adapted from https://github.com/testdrivenio/flask-vue-kubernetes.)
 
-### Volume
-
-Create the volume:
-```
-kubectl apply -f ./kubernetes/persistent-volume.yml
-```
-
-Create the volume claim:
-```
-kubectl apply -f ./kubernetes/persistent-volume-claim.yml
-```
-
 ### Secrets
 
 Create the secret object:
@@ -77,14 +65,19 @@ kubectl apply -f ./kubernetes/secret.yml
 
 ### Postgres
 
+Create the persistent volume claim:
+```
+kubectl apply -f ./kubernetes/postgres-pvc.yml
+```
+
 Create deployment:
 ```
-kubectl create -f ./kubernetes/postgres-deployment.yml
+kubectl apply -f ./kubernetes/postgres-deployment.yml
 ```
 
 Create the service:
 ```
-kubectl create -f ./kubernetes/postgres-service.yml
+kubectl apply -f ./kubernetes/postgres-service.yml
 ```
 
 Create the database:
@@ -105,12 +98,12 @@ docker push $SOME_DOCKER_HUB_NAMESPACE/flashcards-flask
 
 Create the deployment:
 ```
-kubectl create -f ./kubernetes/flask-deployment.yml
+kubectl apply -f ./kubernetes/flask-deployment.yml
 ```
 
 Create the service:
 ```
-kubectl create -f ./kubernetes/flask-service.yml
+kubectl apply -f ./kubernetes/flask-service.yml
 ```
 
 Apply the migrations and seed the database:
@@ -132,15 +125,10 @@ docker push $SOME_DOCKER_HUB_NAMESPACE/flashcards-nginx
 
 Create the deployment:
 ```
-kubectl create -f ./kubernetes/nginx-deployment.yml
+kubectl apply -f ./kubernetes/nginx-deployment.yml
 ```
 
 Create the service:
 ```
-kubectl create -f ./kubernetes/nginx-service.yml
+kubectl apply -f ./kubernetes/nginx-service.yml
 ```
-
-## Todos
-
-* Update README.md and ci scripts to interpolate secret values from environment when deploying secret.yml (`sed | kubectl apply -f -`)
-* Update docker-compose to interpolate base url from environment when starting up nginx (`envsubst`)

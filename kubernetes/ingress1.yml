@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: flashcards
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/auth-type: basic
+    ingress.kubernetes.io/auth-secret: basic-auth
+spec:
+  rules:
+  - host: flashcards.lan.things-on-top-of-other-things.de
+    http:
+        paths:
+        - path: /
+          backend:
+            serviceName: nginx
+            servicePort: 80
+        - path: /flashcards
+          backend:
+            serviceName: flask
+            servicePort: 5000
+  tls:
+  - hosts:
+    - flashcards.lan.things-on-top-of-other-things.de
+    secretName: flashcards-lan-things-on-top-of-other-things-de
