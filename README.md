@@ -6,7 +6,7 @@ Many thanks to
 https://github.com/testdrivenio/flask-vue-kubernetes
 from where the backend with flask and postgres, the docker integration as well as the structure of this project have been adapted. 
 
-## Run with docker-compose
+## Deploy with docker-compose
 
 To run this application with docker-compose
 ```
@@ -52,7 +52,7 @@ curl localhost:5000/flashcards
 }
 ```
 
-## Run with kubernetes
+## Deploy with kubernetes
 
 (Adapted from https://github.com/testdrivenio/flask-vue-kubernetes.)
 
@@ -82,7 +82,6 @@ kubectl apply -f ./kubernetes/postgres-service.yml
 
 Create the database:
 ```
-kubectl get pods
 kubectl exec $(kubectl get pods | grep -o "postgres-[-0-9a-z]*") -- createdb -U postgres flashcards
 ```
 
@@ -108,7 +107,6 @@ kubectl apply -f ./kubernetes/flask-service.yml
 
 Apply the migrations and seed the database:
 ```
-kubectl get pods
 kubectl exec $(kubectl get pods | grep -o "flask-[-0-9a-z]*") -- python3 manage.py recreate_db
 kubectl exec $(kubectl get pods | grep -o "flask-[-0-9a-z]*") -- python3 manage.py seed_db
 ```
@@ -131,4 +129,35 @@ kubectl apply -f ./kubernetes/nginx-deployment.yml
 Create the service:
 ```
 kubectl apply -f ./kubernetes/nginx-service.yml
+```
+
+## Run with terraform
+
+### Build the images
+
+Build the flashcards-flask image and push it to Docker Hub:
+```
+docker build -t $SOME_DOCKER_HUB_NAMESPACE/flashcards-flask ./services/backend
+docker push $SOME_DOCKER_HUB_NAMESPACE/flashcards-flask
+```
+
+Build the flashcards-nginx image and push it to Docker Hub:
+```
+docker build -t $SOME_DOCKER_HUB_NAMESPACE/flashcards-nginx ./services/frontend
+docker push $SOME_DOCKER_HUB_NAMESPACE/flashcards-nginx
+```
+
+> Make sure to replace `$SOME_DOCKER_HUB_NAMESPACE` with your Docker Hub namespace in the above commands as well as in *kubernetes/flask-deployment.yml*.
+
+### Initialize the database
+
+Create the database:
+```
+./run kubectl exec $(./run kubectl get pods | grep -o "postgres-[-0-9a-z]*") -- createdb -U postgres flashcards
+```
+
+Apply the migrations and seed the database:
+```
+./run kubectl exec $(./run kubectl get pods | grep -o "flask-[-0-9a-z]*") -- python3 manage.py recreate_db
+./run kubectl exec $(./run kubectl get pods | grep -o "flask-[-0-9a-z]*") -- python3 manage.py seed_db
 ```
