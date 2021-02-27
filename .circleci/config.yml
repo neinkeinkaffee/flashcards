@@ -1,18 +1,18 @@
-#version: 2
-#jobs:
-#  build:
-#    docker:
-#      - image: circleci/python:3.7.2
-#    steps:
-#      - checkout
-#      - add_ssh_keys
-#
-#      - setup_remote_docker:
-#
-#      - run:
-#          name: Build and push Docker images
-#          command: ./scripts/build.sh
-#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.7.2
+    steps:
+      - checkout
+      - add_ssh_keys
+
+      - setup_remote_docker:
+
+      - run:
+          name: Build and push Docker images
+          command: ./scripts/build.sh
+
 #      - run:
 #          name: Install awscli
 #          command: sudo pip install awscli
@@ -20,8 +20,3 @@
 #      - run:
 #          name: Deploy services
 #          command: ./scripts/deploy.sh
-#
-#
-#
-#
-#
