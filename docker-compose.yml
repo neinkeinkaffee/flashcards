@@ -20,8 +20,8 @@ services:
     build:
       context: ./services/db
       dockerfile: Dockerfile
-    expose:
-      - 5432
+    ports:
+      - 5432:5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -35,6 +35,3 @@ services:
       - 443:443
     links:
       - flask
-# Uncomment for hot reload during development
-#    volumes:
-#      - ./services/client/src:/usr/share/nginx/html

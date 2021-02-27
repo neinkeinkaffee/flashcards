@@ -5,6 +5,13 @@ KUBE_CONFIG_PATH=$KUBECONFIG
 export KUBECONFIG
 export KUBE_CONFIG_PATH
 
+_boot_locally() {
+  docker-compose down
+  docker-compose up -d --build
+  docker-compose exec flask python manage.py recreate_db
+  docker-compose exec flask python manage.py seed_db
+}
+
 get_kubeconfig() {
   echo "Getting kubeconfig file from ${CONTROLLER} and writting to ${KUBECONFIG}"
   echo "Set the ENV var KUBECONFIG=${KUBECONFIG} to use this"
@@ -16,20 +23,22 @@ help() {
   exit 1
 }
 
+_kubectl() {
+  kubectl $@
+}
+
 _terraform() {
   cd terraform
   terraform $@
   cd -
 }
-_kubectl() {
-  kubectl $@
-}
 
 CMD=${1:-}
 shift || true
 case ${CMD} in
+boot) _boot_locally ;;
 get_kubeconfig) get_kubeconfig ;;
-terraform) _terraform $@ ;;
 kubectl) _kubectl $@ ;;
+terraform) _terraform $@ ;;
 *) help ;;
 esac
