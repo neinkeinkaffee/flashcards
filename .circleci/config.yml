@@ -9,7 +9,7 @@ jobs:
 
       - run:
           name: Install python packages
-          command: sudo pip install chromedriver-py pytest selenium
+          command: sudo pip install chromedriver-py==88.0.4324.96 pytest selenium
 
       - run:
           name: Run end-to-end test
