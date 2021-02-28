@@ -83,10 +83,11 @@ function copy_qemu_bin {
 function build_image() {
     local DOCKER_FILE_DIR=$1
     local APP_NAME=$2
+    local COMMIT_HASH=$(git log -1 --pretty=%H)
     local IMAGE_NAME=${DOCKER_HUB_NAMESPACE}/${APP_NAME}
 
-    docker build -t ${IMAGE_NAME}:${CIRCLE_SHA1} ${DOCKER_FILE_DIR}
-    docker tag ${IMAGE_NAME}:${CIRCLE_SHA1} ${IMAGE_NAME}:latest
+    docker build -t ${IMAGE_NAME}:${COMMIT_HASH} ${DOCKER_FILE_DIR}
+    docker tag ${IMAGE_NAME}:${COMMIT_HASH} ${IMAGE_NAME}:latest
 }
 
 function push_image() {
