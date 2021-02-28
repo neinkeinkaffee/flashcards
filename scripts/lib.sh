@@ -82,9 +82,10 @@ function copy_qemu_bin {
 
 function build_image() {
     local DOCKER_FILE_DIR=$1
-    local IMAGE_NAME=$2
+    local IMAGE_NAME=$2:${CIRCLE_SHA1}
 
-    docker build --build-arg BASE_URL=$BASE_URL -t $DOCKER_HUB_NAMESPACE/$IMAGE_NAME $DOCKER_FILE_DIR
+    docker build -t $DOCKER_HUB_NAMESPACE/$IMAGE_NAME $DOCKER_FILE_DIR
+    docker tag $IMAGE_NAME $2:latest
 }
 
 function push_image() {
