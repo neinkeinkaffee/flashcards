@@ -1,14 +1,26 @@
 version: 2.1
 jobs:
+  test:
+    docker:
+      - image: circleci/python:3.7.2
+    steps:
+      - checkout
+      - browser-tools/install-chrome
+
+      - run:
+          name: Install python packages
+          command: sudo pip install pytest chromedriver-py
+
+      - run:
+          name: Run end-to-end test
+          command: ./scripts/test.sh
+
   build:
     docker:
       - image: circleci/python:3.7.2
     steps:
       - checkout
-      - add_ssh_keys
-      - browser-tools/install-chrome
-      - browser-tools/install-chromedriver
-
+#      - add_ssh_keys
       - setup_remote_docker
 
       - run:

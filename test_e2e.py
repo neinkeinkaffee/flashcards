@@ -2,13 +2,14 @@ import unittest
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from chromedriver_py import binary_path
 
 class E2eTests(unittest.TestCase):
 
     def setUp(self):
         options = Options()
         options.headless = True
-        self.driver = webdriver.Chrome(executable_path=r'/Applications/chromedriver', options=options)
+        self.driver = webdriver.Chrome(executable_path=binary_path, options=options)
         self.driver.get('http://localhost')
 
     def tearDown(self):
