@@ -4,5 +4,3 @@ set -eox pipefail
 
 build_and_push ./services/backend flashcards-flask
 build_and_push ./services/frontend flashcards-nginx
-
-
