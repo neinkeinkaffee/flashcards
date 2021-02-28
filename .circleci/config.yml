@@ -23,4 +23,4 @@ jobs:
 #          command: ./scripts/deploy.sh
 
 orbs:
-  browser-tools: circleci/browser-tools@x.y
+  browser-tools: circleci/browser-tools@1.1.3
