@@ -91,7 +91,7 @@ function push_image() {
     local IMAGE_NAME=$1
 
     echo $DOCKER_HUB_PASSWORD | base64 --decode | docker login --username $DOCKER_HUB_NAMESPACE --password-stdin
-    docker push $DOCKER_HUB_NAMESPACE/$IMAGE_NAME
+    docker push $DOCKER_HUB_NAMESPACE/${IMAGE_NAME}:${CIRCLE_SHA1}
 }
 
 function build_and_push() {
