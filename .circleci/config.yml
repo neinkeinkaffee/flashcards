@@ -6,9 +6,9 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys
-#      - browser-tools/install-chrome-driver
+      - browser-tools/install-chrome-driver
 
-      - setup_remote_docker:
+      - setup_remote_docker
 
       - run:
           name: Build and push Docker images
