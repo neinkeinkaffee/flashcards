@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -eo pipefail
 
 docker-compose down
 docker-compose up -d --build
