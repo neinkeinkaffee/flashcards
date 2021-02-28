@@ -4,8 +4,8 @@ services:
 
   flask:
     build:
-      context: services/backend
-      dockerfile: ../services/backend/Dockerfile.x86
+      context: ../services/backend
+      dockerfile: Dockerfile.x86
     ports:
       - 5000:5000
     environment:
@@ -18,8 +18,8 @@ services:
 
   postgres:
     build:
-      context: services/db
-      dockerfile: ../services/db/Dockerfile
+      context: ../services/db
+      dockerfile: Dockerfile
     ports:
       - 5432:5432
     environment:
@@ -28,16 +28,16 @@ services:
 
   flashcards:
     build:
-      context: services/frontend
-      dockerfile: ../services/frontend/Dockerfile.x86
+      context: ../services/frontend
+      dockerfile: Dockerfile.x86
     ports:
       - 80:80
       - 443:443
     links:
       - flask
 
-  integration:
-    build: test
+  e2e:
+    build: .
     volumes:
       - .:/app
     working_dir: /app

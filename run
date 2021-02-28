@@ -5,7 +5,7 @@ KUBE_CONFIG_PATH=$KUBECONFIG
 export KUBECONFIG
 export KUBE_CONFIG_PATH
 
-boot_locally() {
+run_e2e_tests() {
   docker-compose down
   docker-compose up -d --build
   docker-compose exec flask python manage.py recreate_db
@@ -36,7 +36,7 @@ terraform() {
 CMD=${1:-}
 shift || true
 case ${CMD} in
-boot) boot_locally ;;
+e2e) run_e2e_tests ;;
 get_kubeconfig) get_kubeconfig ;;
 kubectl) kubectl $@ ;;
 terraform) terraform $@ ;;
