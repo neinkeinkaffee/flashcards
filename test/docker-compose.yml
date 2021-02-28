@@ -38,8 +38,6 @@ services:
 
   e2e:
     build: .
-    volumes:
-      - .:/app
     working_dir: /app
     cap_add:
       - SYS_ADMIN
