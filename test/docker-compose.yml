@@ -38,7 +38,7 @@ services:
 
   e2e:
     build: .
-    working_dir: /app
+    working_dir: /data
     cap_add:
       - SYS_ADMIN
     shm_size: 1024M

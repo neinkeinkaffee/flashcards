@@ -30,4 +30,4 @@ RUN mkdir /data && chown -R headless:headless /data
 
 USER headless
 
-COPY . /app
+COPY . /data
