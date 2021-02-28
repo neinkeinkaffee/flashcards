@@ -29,3 +29,5 @@ RUN useradd headless --shell /bin/bash --create-home \
 RUN mkdir /data && chown -R headless:headless /data
 
 USER headless
+
+COPY . /app
