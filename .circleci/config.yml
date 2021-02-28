@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys
+      - browser-tools/install-chrome
       - browser-tools/install-chromedriver
 
       - setup_remote_docker
