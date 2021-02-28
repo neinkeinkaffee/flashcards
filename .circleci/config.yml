@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys
+      - browser-tools/install-chrome-driver
 
       - setup_remote_docker:
 
@@ -20,3 +21,6 @@ jobs:
 #      - run:
 #          name: Deploy services
 #          command: ./scripts/deploy.sh
+
+orbs:
+  browser-tools: circleci/browser-tools@x.y
