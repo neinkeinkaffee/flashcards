@@ -23,11 +23,11 @@ help() {
   exit 1
 }
 
-kubectl() {
+_kubectl() {
   kubectl $@
 }
 
-terraform() {
+_terraform() {
   cd terraform
   terraform $@
   cd -
@@ -38,7 +38,7 @@ shift || true
 case ${CMD} in
 e2e) run_e2e_tests ;;
 get_kubeconfig) get_kubeconfig ;;
-kubectl) kubectl $@ ;;
-terraform) terraform $@ ;;
+kubectl) _kubectl $@ ;;
+terraform) _terraform $@ ;;
 *) help ;;
 esac
