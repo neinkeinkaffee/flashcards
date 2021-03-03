@@ -38,6 +38,8 @@ services:
 
   e2e:
     build: .
+    volumes:
+      - .:/data
     working_dir: /data
     cap_add:
       - SYS_ADMIN
