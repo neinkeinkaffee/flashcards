@@ -26,7 +26,7 @@ resource "kubernetes_deployment" "nginx" {
       spec {
         container {
           name  = "nginx"
-          image = "neinkeinkaffee/flashcards-nginx-no-tls:latest"
+          image = "neinkeinkaffee/flashcards-nginx:${var.commit_sha}"
 
           env {
             name = "BASE_URL"
