@@ -4,7 +4,7 @@ describe('Testing CRUD operations on the flashcard deck', ()=> {
         deck.add('咖啡', 'coffee')
         expect(deck.getCards().length).toBe(1)
     })
-    it('should delete a flashcard', () => {
+    it('should delete a flashcard by id', () => {
         let deck = new Deck()
         id1 = deck.add('咖啡', 'coffee')
         id2 = deck.add('茶', 'tea')

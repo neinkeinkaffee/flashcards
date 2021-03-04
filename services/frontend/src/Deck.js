@@ -11,7 +11,7 @@ function Deck() {
 Deck.prototype.add = function(chinese, english) {
     card = {
         'chinese' : chinese,
-        'english': english
+        'english': english,
     }
     console.log(JSON.stringify(card))
     fetch('$BASE_URL' + '/flashcards', {
@@ -22,6 +22,9 @@ Deck.prototype.add = function(chinese, english) {
             'Content-Type': 'application/json'
         }
     });
+    card['uuid'] = Deck.prototype.generateUUID()
+    this.cards.push(card);
+    return card['uuid']
 }
 Deck.prototype.delete = function(uuid) {
     this.cards = this.cards.filter(card => {
@@ -41,12 +44,7 @@ Deck.prototype.generateUUID = function() {
     return uuid;
 }
 Deck.prototype.random = function() {
-    return fetch('$BASE_URL' + '/flashcards')
-        .then(response => response.json())
-        .then(data => data['flashcards'])
-        .then(flashcards => {
-            let rand = Math.floor((Math.random() * flashcards.length))
-            console.log(flashcards[rand]);
-            return flashcards[rand];
-        });
+    let rand = Math.floor((Math.random() * this.cards.length))
+    console.log(this.cards[rand]);
+    return this.cards[rand];
 }
