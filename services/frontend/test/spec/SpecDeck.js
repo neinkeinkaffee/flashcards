@@ -1,4 +1,5 @@
 describe('Testing CRUD operations on the flashcard deck', ()=> {
+    var Deck = require('../../src/Deck.js');
     it('should add a new flashcard', () => {
         let deck = new Deck()
         deck.add('咖啡', 'coffee')

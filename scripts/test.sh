@@ -14,10 +14,13 @@ function e2e_test() {
 
 function flask_test() {
   pushd services/backend
-  docker-compose down
-  docker-compose up -d
   docker-compose run test /bin/sh -c "pip install -r /data/requirements.txt && pytest /data/flashcards/tests"
-  docker-compose down
+  popd
+}
+
+function js_test () {
+  pushd services/frontend
+  docker-compose run test /bin/sh -c "npm --prefix test install && npm --prefix test test"
   popd
 }
 
@@ -26,4 +29,5 @@ shift || true
 case ${CMD} in
 e2e) e2e_test ;;
 flask) flask_test ;;
+js) js_test ;;
 esac
