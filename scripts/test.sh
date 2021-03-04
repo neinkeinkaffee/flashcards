@@ -12,8 +12,18 @@ function e2e_test() {
   popd
 }
 
+function flask_test() {
+  pushd services/backend
+  docker-compose down
+  docker-compose up -d
+  docker-compose run test /bin/sh -c "pip install -r /data/requirements.txt && pytest /data/flashcards/tests"
+  docker-compose down
+  popd
+}
+
 CMD=${1:-}
 shift || true
 case ${CMD} in
 e2e) e2e_test ;;
+flask) flask_test ;;
 esac

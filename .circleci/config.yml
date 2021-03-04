@@ -7,6 +7,10 @@ jobs:
       - checkout
 
       - run:
+          name: Run backend unit tests
+          command: ./scripts/test.sh flask
+
+      - run:
           name: Run end-to-end test
           command: ./scripts/test.sh e2e
 
