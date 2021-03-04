@@ -8,7 +8,7 @@ jobs:
 
       - run:
           name: Run end-to-end test
-          command: ./scripts/test.sh
+          command: ./scripts/test.sh e2e
 
   build:
     docker:
