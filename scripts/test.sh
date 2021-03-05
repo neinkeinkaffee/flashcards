@@ -20,7 +20,22 @@ function flask_test() {
 
 function js_test () {
   pushd services/frontend
-  docker-compose run test /bin/sh -c "npm --prefix test install && npm --prefix test test"
+  docker-compose run test /bin/sh run_jasmine.sh
+  popd
+}
+
+function run_locally_start() {
+  pushd test
+  docker-compose down
+  docker-compose up -d --build
+  docker-compose exec flask python manage.py recreate_db
+  docker-compose exec flask python manage.py seed_db
+  popd
+}
+
+function run_locally_stop() {
+  pushd test
+  docker-compose down
   popd
 }
 
@@ -30,4 +45,6 @@ case ${CMD} in
 e2e) e2e_test ;;
 flask) flask_test ;;
 js) js_test ;;
+start) run_locally_start ;;
+stop) run_locally_stop ;;
 esac

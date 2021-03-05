@@ -1,11 +1,9 @@
-function Deck() {
-    this.cards = []
-    fetch('$BASE_URL' + '/flashcards')
-        .then(response => response.json())
+function Deck(api) {
+    this.cards = [];
+    this.api = api;
+    this.api.get()
         .then(data => {
-            console.log(data);
             this.cards = data['flashcards'];
-            console.log(this.cards);
         });
 }
 Deck.prototype.add = function(chinese, english) {
@@ -13,15 +11,7 @@ Deck.prototype.add = function(chinese, english) {
         'chinese' : chinese,
         'english': english,
     }
-    console.log(JSON.stringify(card))
-    fetch('$BASE_URL' + '/flashcards', {
-        method: 'POST',
-        body: JSON.stringify(card), // string or object
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    });
+    this.api.post(card);
     card['uuid'] = Deck.prototype.generateUUID()
     this.cards.push(card);
     return card['uuid']
@@ -44,7 +34,14 @@ Deck.prototype.generateUUID = function() {
     return uuid;
 }
 Deck.prototype.random = function() {
-    let rand = Math.floor((Math.random() * this.cards.length))
-    console.log(this.cards[rand]);
-    return this.cards[rand];
+    return this.api.get().then(data => {
+            let flashcards = data['flashcards'];
+            return flashcards;
+        })
+        .then(flashcards => {
+            let rand = Math.floor(Math.random() * flashcards.length);
+            return flashcards[rand];
+        });
 }
+// Used for unit testing
+//module.exports = Deck;
