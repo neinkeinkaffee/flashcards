@@ -10,3 +10,4 @@
   
 ### Frontend
 - Deck.js: Decouple model from CRUD backend calls
+- Implement consistent way of syncing of state between frontend and DB
