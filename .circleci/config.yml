@@ -7,6 +7,10 @@ jobs:
       - checkout
 
       - run:
+          name: Print commit hash of last successful build
+          command: curl -Ss -u "${CIRCLE_API_USER_TOKEN}:" "https://circleci.com/api/v1.1/project/github/neinkeinkaffee/flashcards?filter=completed&limit=1" | jq -r '.[0]["vcs_revision"]'
+
+      - run:
           name: Run frontend unit tests
           command: ./scripts/test.sh js
 
