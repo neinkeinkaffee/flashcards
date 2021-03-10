@@ -8,7 +8,7 @@ jobs:
 
       - run:
           name: Store commit hash of last successful build in environment variable
-          command: export LAST_SUCCESSFUL_COMMIT=$(curl -Ss -u "${CIRCLE_API_USER_TOKEN}:" "https://circleci.com/api/v1.1/project/github/neinkeinkaffee/flashcards?filter=completed&limit=1" | jq -r '.[0]["vcs_revision"]')
+          command: echo "export LAST_SUCCESSFUL_COMMIT=$(curl -Ss -u "${CIRCLE_API_USER_TOKEN}:" "https://circleci.com/api/v1.1/project/github/neinkeinkaffee/flashcards?filter=completed&limit=1" | jq -r '.[0]["vcs_revision"]')" >> $BASH_ENV
 
       - run:
           name: Print commit hash of last successful build
