@@ -114,7 +114,7 @@ function kubectl_exec() {
     exec_on_pi sudo kubectl exec $POD_ID --stdin -- $COMMAND
 }
 
-function git_diff_since_commit_in_subdir() {
+function git_diff() {
   local COMMIT_HASH=$1
   local SUBDIR=$2
   local GIT_DIFF=$(git diff $COMMIT_HASH $SUBDIR)
