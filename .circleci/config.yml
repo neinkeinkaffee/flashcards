@@ -7,6 +7,14 @@ jobs:
       - checkout
 
       - run:
+          name: Store commit hash of last successful build in BASH_ENV
+          command: echo "export LAST_BUILD_COMMIT_HASH=$(curl -Ss -u "${CIRCLE_API_USER_TOKEN}:" "https://circleci.com/api/v1.1/project/github/neinkeinkaffee/flashcards?filter=completed&limit=1" | jq -r '.[0]["vcs_revision"]')" >> $BASH_ENV
+
+      - run:
+          name: Print commit hash of last successful build
+          command: echo $LAST_BUILD_COMMIT_HASH
+
+      - run:
           name: Run frontend unit tests
           command: ./scripts/test.sh js
 
