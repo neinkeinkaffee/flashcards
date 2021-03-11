@@ -118,5 +118,5 @@ function git_diff() {
   local COMMIT_HASH=$1
   local SUBDIR=$2
   local GIT_DIFF=$(git diff $COMMIT_HASH $SUBDIR)
-  echo $COMMIT_HASH && $GIT_DIFF
+  echo $GIT_DIFF
 }
