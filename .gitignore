@@ -9,3 +9,4 @@ secret*.yml
 auth
 terraform.tfvars
 terraform/*.tfstate*
+*/.terraform*

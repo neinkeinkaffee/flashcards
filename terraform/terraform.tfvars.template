@@ -1,0 +1,6 @@
+basic_auth_user = ""
+basic_auth_password = ""
+commit_sha = ""
+domain = ""
+postgres_user = ""
+postgres_password = ""
