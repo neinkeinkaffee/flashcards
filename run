@@ -9,6 +9,14 @@ run_e2e_tests() {
   ./scripts/test.sh e2e
 }
 
+start_locally() {
+  ./scripts/test.sh start
+}
+
+stop_locally() {
+  ./scripts/test.sh stop
+}
+
 get_kubeconfig() {
   echo "Getting kubeconfig file from ${CONTROLLER} and writting to ${KUBECONFIG}"
   echo "Set the ENV var KUBECONFIG=${KUBECONFIG} to use this"
@@ -34,6 +42,8 @@ CMD=${1:-}
 shift || true
 case ${CMD} in
 e2e) run_e2e_tests ;;
+start) start_locally ;;
+stop) stop_locally ;;
 get_kubeconfig) get_kubeconfig ;;
 kubectl) _kubectl $@ ;;
 terraform) _terraform $@ ;;
