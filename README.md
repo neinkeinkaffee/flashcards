@@ -46,7 +46,7 @@ Apply the migrations and seed the database:
 ./run kubectl exec $(./run kubectl get pods | grep -o "flask-[-0-9a-z]*") -- python3 manage.py seed_db
 ```
 
-## Deploy with docker-compose
+## Run locally with docker-compose
 
 To run this application with docker-compose
 ```
@@ -92,7 +92,7 @@ curl localhost:5000/flashcards
 }
 ```
 
-## Deploy with kubernetes
+## Deploy with kubectl
 
 (Adapted from https://github.com/testdrivenio/flask-vue-kubernetes.)
 
