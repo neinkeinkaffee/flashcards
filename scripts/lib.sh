@@ -126,6 +126,6 @@ function terraform_apply() {
   cd terraform
   echo $KUBECONFIG | base64 -d > kubeconfig
   terraform init
-  KUBE_CONFIG_PATH=kubeconfig terraform apply -y -var="commit_sha=${COMMIT_HASH}"
+  KUBE_CONFIG_PATH=kubeconfig terraform apply --auto-approve -var="commit_sha=${COMMIT_HASH}"
   cd ..
 }

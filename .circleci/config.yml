@@ -45,6 +45,12 @@ jobs:
           name: Build and push Docker images
           command: ./scripts/build.sh $LAST_BUILD_COMMIT_HASH
 
+  deploy:
+    docker:
+      - image: hashicorp/terraform:light
+    steps:
+      - checkout
+
       - run:
           name: Deploy services
           command: ./scripts/deploy.sh $LAST_BUILD_COMMIT_BASH
