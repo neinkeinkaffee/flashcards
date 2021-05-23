@@ -115,8 +115,17 @@ function kubectl_exec() {
 }
 
 function git_diff() {
-  local COMMIT_HASH=$1
-  local SUBDIR=$2
+  local SUBDIR=$1
+  local COMMIT_HASH=$2
   local GIT_DIFF=$(git diff $COMMIT_HASH $SUBDIR)
   echo $GIT_DIFF
+}
+
+function terraform_apply() {
+  COMMIT_HASH=$1
+  cd terraform
+  echo $KUBECONFIG | base64 -d > kubeconfig
+  terraform init
+  KUBE_CONFIG_PATH=kubeconfig terraform apply -y -var="commit_sha=${COMMIT_HASH}"
+  cd ..
 }
