@@ -53,7 +53,7 @@ jobs:
 
       - run:
           name: Deploy services
-          command: ./scripts/deploy.sh $LAST_BUILD_COMMIT_BASH
+          command: ./scripts/deploy.sh $LAST_BUILD_COMMIT_HASH
 
 orbs:
   browser-tools: circleci/browser-tools@1.1.3
