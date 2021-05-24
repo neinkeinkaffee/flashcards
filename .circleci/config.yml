@@ -89,13 +89,10 @@ orbs:
 workflows:
   test_and_build:
     jobs:
-      - deploy
-#      - deploy:
-#          requires:
-#            - build
-      - test:
-          requires:
-            - deploy
+      - test
       - build:
           requires:
             - test
+      - deploy:
+          requires:
+            - build
