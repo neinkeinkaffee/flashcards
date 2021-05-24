@@ -47,7 +47,7 @@ jobs:
 
   deploy:
     docker:
-      - image: hashicorp/terraform:0.14.11
+      - image: circleci/python:3.7.2
     steps:
       - checkout
 
@@ -60,12 +60,16 @@ jobs:
           command: echo $LAST_BUILD_COMMIT_HASH
 
       - run:
-          name: Install bash
-          command: apt update && apt install -y bash
+          name: Install terraform
+          command: |
+            apt-get update && sudo apt-get install -y gnupg software-properties-common curl && \
+            curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
+            sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" && \
+            sudo apt-get update && sudo apt-get install terraform
 
       - run:
           name: Deploy services
-          command: ./scripts/deploy.sh 0d3dcb4253ce336214f70d161f05e0a72ddf5cdf
+          command: ./scripts/deploy.sh $LAST_BUILD_COMMIT_HASH
 
 orbs:
   browser-tools: circleci/browser-tools@1.1.3
