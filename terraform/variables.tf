@@ -1,3 +1,4 @@
+variable aws_region {}
 variable "basic_auth_user" {}
 variable "basic_auth_password" {}
 variable "commit_sha" {}

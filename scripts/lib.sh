@@ -125,7 +125,7 @@ function terraform_apply() {
   COMMIT_HASH=$1
   cd terraform
   echo $KUBECONFIG | base64 -d > kubeconfig
-  terraform init
+  terraform init -backend-config="bucket=$AWS_STATE_BUCKET" -backend-config="region=$AWS_REGION"
   KUBE_CONFIG_PATH=kubeconfig terraform apply --auto-approve -var="commit_sha=${COMMIT_HASH}"
   cd ..
 }
