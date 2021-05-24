@@ -111,7 +111,8 @@ function kubectl_exec() {
     local POD_NAME=${PARAMS[0]}
     local COMMAND=${PARAMS[@]:1}
     local POD_ID=$(grep_pod_id $POD_NAME)
-    exec_on_pi sudo kubectl exec $POD_ID --stdin -- $COMMAND
+    echo $KUBECONFIG | base64 -d > kubeconfig
+    kubectl exec $POD_ID --stdin -- $COMMAND
 }
 
 function has_diff_since_last_build() {
