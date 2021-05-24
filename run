@@ -24,7 +24,7 @@ get_kubeconfig() {
 }
 
 help() {
-  echo "usage $0 get_kubeconfig | kubectl <options> | terraform <options> "
+  echo "usage $0 get_kubeconfig | kubectl <options> | terraform <options> | e2e | start | stop"
   exit 1
 }
 
