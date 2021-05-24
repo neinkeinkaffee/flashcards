@@ -49,7 +49,7 @@ function close_port() {
 
 function grep_pod_id() {
     local POD_NAME=$1
-    local POD_ID=$(exec_on_pi sudo kubectl get pods | grep -o $POD_NAME-[-0-9a-z]*)
+    local POD_ID=$(kubectl get pods | grep -o $POD_NAME-[-0-9a-z]*)
     echo $POD_ID
 }
 
@@ -111,7 +111,6 @@ function kubectl_exec() {
     local POD_NAME=${PARAMS[0]}
     local COMMAND=${PARAMS[@]:1}
     local POD_ID=$(grep_pod_id $POD_NAME)
-    echo $KUBECONFIG | base64 -d > kubeconfig
     kubectl exec $POD_ID --stdin -- $COMMAND
 }
 
