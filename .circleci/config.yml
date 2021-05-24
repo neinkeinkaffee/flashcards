@@ -61,7 +61,7 @@ jobs:
 
       - run:
           name: Deploy services
-          command: ./scripts/deploy.sh $LAST_BUILD_COMMIT_HASH
+          command: ./scripts/deploy.sh 0d3dcb4253ce336214f70d161f05e0a72ddf5cdf
 
 orbs:
   browser-tools: circleci/browser-tools@1.1.3
@@ -73,7 +73,9 @@ workflows:
 #      - deploy:
 #          requires:
 #            - build
-      - test
+      - test:
+          requires:
+            - deploy
       - build:
           requires:
             - test
