@@ -60,6 +60,10 @@ jobs:
           command: echo $LAST_BUILD_COMMIT_HASH
 
       - run:
+          name: Install bash
+          command: apt update && apt install -y bash
+
+      - run:
           name: Deploy services
           command: ./scripts/deploy.sh 0d3dcb4253ce336214f70d161f05e0a72ddf5cdf
 
