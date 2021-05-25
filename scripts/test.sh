@@ -14,7 +14,7 @@ function e2e_test() {
 
 function flask_test() {
   pushd services/backend
-  docker-compose run test /bin/sh -c "pip install -r /data/requirements.txt && pytest /data/flashcards/e2e-test"
+  docker-compose run test /bin/sh -c "pip install -r /data/requirements.txt && pytest /data/flashcards/tests"
   popd
 }
 
