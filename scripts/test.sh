@@ -4,7 +4,7 @@ set -eo pipefail
 function e2e_test() {
   pushd e2e-test
   docker-compose down
-  docker-compose up -d --build
+  BASE_URL=http://flashcards docker-compose up -d --build
   docker-compose exec flask python manage.py recreate_db
   docker-compose exec flask python manage.py seed_db
   docker-compose run e2e py.test
@@ -27,7 +27,7 @@ function js_test () {
 function run_locally_start() {
   pushd e2e-test
   docker-compose down
-  docker-compose up -d --build
+  BASE_URL=http://localhost docker-compose up -d --build
   docker-compose exec flask python manage.py recreate_db
   docker-compose exec flask python manage.py seed_db
   popd
