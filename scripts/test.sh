@@ -2,7 +2,7 @@
 set -eo pipefail
 
 function e2e_test() {
-  pushd test
+  pushd e2e-test
   docker-compose down
   docker-compose up -d --build
   docker-compose exec flask python manage.py recreate_db
@@ -14,7 +14,7 @@ function e2e_test() {
 
 function flask_test() {
   pushd services/backend
-  docker-compose run test /bin/sh -c "pip install -r /data/requirements.txt && pytest /data/flashcards/tests"
+  docker-compose run test /bin/sh -c "pip install -r /data/requirements.txt && pytest /data/flashcards/e2e-tests"
   popd
 }
 
@@ -25,7 +25,7 @@ function js_test () {
 }
 
 function run_locally_start() {
-  pushd test
+  pushd e2e-test
   docker-compose down
   docker-compose up -d --build
   docker-compose exec flask python manage.py recreate_db
@@ -34,7 +34,7 @@ function run_locally_start() {
 }
 
 function run_locally_stop() {
-  pushd test
+  pushd e2e-test
   docker-compose down
   popd
 }
